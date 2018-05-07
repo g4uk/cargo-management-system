@@ -25,10 +25,12 @@ class AddRelationships < ActiveRecord::Migration[5.2]
 
     change_table :trucks do |t|
       t.belongs_to :driver, index: true
+      t.belongs_to :company, index: true
     end
 
     change_table :trailers do |t|
       t.belongs_to :truck, index: true
+      t.belongs_to :company, index: true
     end
 
     change_table :goods do |t|
@@ -47,7 +49,9 @@ class AddRelationships < ActiveRecord::Migration[5.2]
     add_foreign_key :orders, :customers
     add_foreign_key :orders, :drivers
     add_foreign_key :trucks, :drivers
+    add_foreign_key :trucks, :companies
     add_foreign_key :trailers, :trucks
+    add_foreign_key :trailers, :companies
     add_foreign_key :goods, :customers
     add_foreign_key :goods_orders, :orders
     add_foreign_key :goods_orders, :goods

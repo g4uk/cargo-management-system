@@ -412,7 +412,8 @@ CREATE TABLE public.trailers (
     year_of_issue date NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    truck_id bigint
+    truck_id bigint,
+    company_id bigint
 );
 
 
@@ -448,7 +449,8 @@ CREATE TABLE public.trucks (
     year_of_issue date NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    driver_id bigint
+    driver_id bigint,
+    company_id bigint
 );
 
 
@@ -772,10 +774,24 @@ CREATE INDEX index_orders_on_driver_id ON public.orders USING btree (driver_id);
 
 
 --
+-- Name: index_trailers_on_company_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_trailers_on_company_id ON public.trailers USING btree (company_id);
+
+
+--
 -- Name: index_trailers_on_truck_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_trailers_on_truck_id ON public.trailers USING btree (truck_id);
+
+
+--
+-- Name: index_trucks_on_company_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_trucks_on_company_id ON public.trucks USING btree (company_id);
 
 
 --
@@ -802,6 +818,14 @@ ALTER TABLE ONLY public.orders
 
 
 --
+-- Name: trucks fk_rails_654a697a5e; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.trucks
+    ADD CONSTRAINT fk_rails_654a697a5e FOREIGN KEY (company_id) REFERENCES public.companies(id);
+
+
+--
 -- Name: orders fk_rails_704256a413; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -823,6 +847,14 @@ ALTER TABLE ONLY public.trucks
 
 ALTER TABLE ONLY public.goods
     ADD CONSTRAINT fk_rails_94aa79ce98 FOREIGN KEY (customer_id) REFERENCES public.customers(id);
+
+
+--
+-- Name: trailers fk_rails_969bd1d1e2; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.trailers
+    ADD CONSTRAINT fk_rails_969bd1d1e2 FOREIGN KEY (company_id) REFERENCES public.companies(id);
 
 
 --

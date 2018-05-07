@@ -2,5 +2,10 @@ Rails.application.routes.draw do
   devise_for :company_owners
   devise_for :drivers
   devise_for :customers
+
+  resources :companies
+  resources :trucks
+  resources :trailers
+  resources :goods
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
