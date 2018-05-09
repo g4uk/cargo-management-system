@@ -1,0 +1,11 @@
+<div class="breadcrumbs">
+  <nav aria-label="breadcrumb">
+    <%= breadcrumbs do %>
+      <%= breadcrumb 'Company owners', company_owners_path %>
+      <%= breadcrumb @form.model.id, company_owner_path(@form.model) %>
+      <%= breadcrumb 'Edit' %>
+    <% end %>
+  </nav>
+</div>
+
+<%= render 'form' %>

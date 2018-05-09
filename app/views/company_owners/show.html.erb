@@ -1,0 +1,22 @@
+<div class="breadcrumbs">
+  <nav aria-label="breadcrumb" >
+    <%= breadcrumbs do %>
+      <%= breadcrumb 'Company owners', company_owners_path %>
+      <%= breadcrumb "#{@model.id}" %>
+    <% end %>
+  </nav>
+</div>
+<div class="col-md-6 offset-md-3 show-margin">
+  <ul class="list-group">
+    <li class="list-group-item"><strong>First name: </strong><%= @model.first_name %></li>
+    <li class="list-group-item"><strong>Last name: </strong><%= @model.last_name%></li>
+    <li class="list-group-item"><strong>Email: </strong><%= @model.email %></li>
+    <li class="list-group-item"><strong>Phone: </strong><%= @model.phone %></li>
+    <li class="list-group-item"><strong>Actions: </strong>
+      <%= link_to 'Edit', edit_company_owners_path(@model), class: 'btn btn-success btn-sm' %>
+      <%= link_to 'Delete', company_owner_path(@model),
+                  class: 'btn btn-danger btn-sm', method: :delete,
+                  data: {confirm: 'Are you sure?'} %>
+    </li>
+  </ul>
+</div>

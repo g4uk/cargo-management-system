@@ -11,11 +11,11 @@ class AddRelationships < ActiveRecord::Migration[5.2]
     end
 
     change_table :driver_licenses do |t|
-      t.belongs_to :driver, index: true
+      t.belongs_to :driver, index: true, unique: true
     end
 
     change_table :insurance_policies do |t|
-      t.belongs_to :driver, index: true
+      t.belongs_to :driver, index: true, unique: true
     end
 
     change_table :orders do |t|
@@ -44,8 +44,8 @@ class AddRelationships < ActiveRecord::Migration[5.2]
 
     add_foreign_key :companies, :company_owners
     add_foreign_key :drivers, :companies
-    add_foreign_key :driver_licenses, :drivers
-    add_foreign_key :insurance_policies, :drivers
+    add_foreign_key :driver_licenses, :drivers, unique: true
+    add_foreign_key :insurance_policies, :drivers, unique: true
     add_foreign_key :orders, :customers
     add_foreign_key :orders, :drivers
     add_foreign_key :trucks, :drivers

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>CargoManagementSystem</title>
+    <title>Cargo management system</title>
+    <%= favicon_link_tag 'logo.ico'%>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +11,8 @@
   </head>
 
   <body>
+    <%= render 'layouts/application/menu' %>
+    <%= render 'layouts/application/notifications' %>
     <%= yield %>
   </body>
 </html>

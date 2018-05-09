@@ -6,6 +6,6 @@ class Driver < ApplicationRecord
   has_one :driver_license, dependent: :delete
   has_one :truck
   has_many :insurance_policies
-  belongs_to :company
+  belongs_to :company, optional: true
   has_many :orders
 end

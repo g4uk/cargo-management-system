@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-lg navbar-light navbar-color">
+  <a class="navbar-brand" href="<%= root_path %>"> <%= image_tag('logo.png', alt: 'Cargo', height: '35', width: '35', border: '0') %> </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="<%= companies_path %>">Companies<span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+      <% unless current_customer || current_company_owner || current_driver %>
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+          <ul class="navbar-nav ml-auto">
+      <li class="nav-item dropdown active">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Log in
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="<%= new_customer_session_path %>">as Customer</a>
+          <a class="dropdown-item" href="<%= new_company_owner_session_path %>">as Company owner</a>
+          <a class="dropdown-item" href="<%= new_driver_session_path %>">as Driver</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">as Admin</a>
+        </div>
+      </li>
+      <% end %>
+    </ul>
+    </div>
+  </div>
+</nav>

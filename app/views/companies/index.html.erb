@@ -1,0 +1,42 @@
+<div class="breadcrumbs">
+  <nav aria-label="breadcrumb" >
+    <%= breadcrumbs do %>
+      <%= breadcrumb 'Companies' %>
+    <% end %>
+
+    <%= link_to 'New company', new_company_path, class: 'btn btn-sm btn-primary action-button' %>
+  </nav>
+</div>
+
+<%= render 'search' %>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">Name</th>
+    <th scope="col">Address</th>
+    <th scope="col">Phone</th>
+    <th scope="col">Email</th>
+    <th scope="col" colspan="2">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @companies.each do |company| %>
+  <tr>
+    <td><%= link_to company.name, company_path(company) %></td>
+    <td><%= company.address %></td>
+    <td><%= company.phone %></td>
+    <td><%= company.email ? company.email : 'N/A' %></td>
+    <td><%= link_to 'Edit', edit_company_path(company), class: 'btn btn-success' %></td>
+    <td><%= link_to 'Delete', company_path(company), method: :delete,
+                    class: 'btn btn-danger', data: { confirm: 'Are you sure?' }%></td>
+  </tr>
+  <% end %>
+  </tbody>
+  <%= paginate @companies %>
+</table>
+
+
+
+
+

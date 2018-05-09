@@ -22,6 +22,8 @@ gem 'devise'
 gem 'dotenv-rails'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
+gem 'ffaker'
+gem 'jquery-rails'
 gem 'kaminari'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'trailblazer-rails'

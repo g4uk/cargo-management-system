@@ -1,0 +1,11 @@
+<div class="col-md-8 offset-md-2", style="margin-bottom: 15px" >
+<%= search_form_for @search, url: company_owners_path, method: :get, class: "form-inline my-2 my-lg-0" do |f| %>
+  <%= f.search_field :first_name_cont, class: 'form-control mr-sm-2', placeholder: 'First name contains' %>
+  <%= f.search_field :last_name_cont, class: 'form-control mr-sm-2', placeholder: 'Last name contains' %>
+  <%= f.search_field :email_cont, class: 'form-control mr-sm-2', placeholder: 'Email contains' %>
+  <div class="form-group">
+    <%= f.submit 'Search', class: 'btn btn-outline-success my-2 my-sm-0', style: 'margin-right: 10px' %>
+    <%= link_to 'Reset', {}, class: 'btn btn-outline-danger my-2 my-sm-0' %>
+  </div>
+<% end %>
+</div>
