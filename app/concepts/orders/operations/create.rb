@@ -7,4 +7,10 @@ class Order::Create < ApplicationOperation
   step Nested(Present)
   step Contract::Validate(key: :order)
   step Contract::Persist()
+  step :add_goods_to_order
+
+  def add_goods_to_order(_options, model:, params:, **)
+    params[:order][:goods_ids].delete('')
+    params[:order][:goods_ids].map { |i| model.goods << Good.find(i) }
+  end
 end

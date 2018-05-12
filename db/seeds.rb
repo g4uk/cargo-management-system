@@ -38,20 +38,20 @@ end
                  email: FFaker::Internet.unique.email,
                  password: '12345678',
                  phone: FFaker::PhoneNumber.short_phone_number,
-                 birth_date: FFaker::Time.between('1950-01-01 00:00', '1997-01-01 00:00'),
-                 medical_examination_validity: FFaker::Time.between('2019-01-01 00:00', '2021-01-01 00:00'))
+                 birth_date: FFaker::Time.between('1950-01-01 00:00', '1997-01-01 00:00').to_date.strftime('%m/%d/%Y'),
+                 medical_examination_validity: FFaker::Time.between('2019-01-01 00:00', '2021-01-01 00:00').to_date.strftime('%m/%d/%Y'))
 end
 
 30.times do |n|
   DriverLicense.create!(categories: 'ABCDE',
-                        valid_to: FFaker::Time.between('2019-01-01 00:00', '2021-01-01 00:00'),
+                        valid_to: FFaker::Time.between('2019-01-01 00:00', '2021-01-01 00:00').to_date.strftime('%m/%d/%Y'),
                         driver_id: n + 1)
 end
 
 goods_types = %w[Tech Clothes Food]
 
 100.times do
-  Good.create!(name: FFaker::Product.name,
+  Good.create!(name: FFaker::Product.product_name,
                weight: rand(1..100).to_s + 'kg',
                volume: rand(1..5).to_s + 'm3',
                goods_type: goods_types[rand(0..2)],
@@ -59,9 +59,9 @@ goods_types = %w[Tech Clothes Food]
 end
 
 30.times do |n|
-  InsurancePolicy.create!(valid_to: FFaker::Time.between('2019-01-01 00:00', '2021-01-01 00:00'),
+  InsurancePolicy.create!(valid_to: FFaker::Time.between('2019-01-01 00:00', '2021-01-01 00:00').to_date.strftime('%m/%d/%Y'),
                           insurance_policy_type: rand(1..15).to_s,
-                          cost: rand(15.0..150.0),
+                          cost: rand(15.0..150.0).round(2),
                           driver_id: n + 1)
 end
 

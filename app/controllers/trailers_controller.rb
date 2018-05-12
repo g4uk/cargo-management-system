@@ -7,6 +7,13 @@ class TrailersController < ApplicationController
 
   def new
     run Trailer::Create::Present
+    if params[:selected_company_id]
+      @company = Company.find(params[:selected_company_id])
+    end
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 
   def create

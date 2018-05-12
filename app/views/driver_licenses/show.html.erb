@@ -1,0 +1,22 @@
+<div class="breadcrumbs">
+  <nav aria-label="breadcrumb" >
+    <%= breadcrumbs do %>
+      <%= breadcrumb 'Driver Licenses', driver_licenses_path %>
+      <%= breadcrumb "#{@model.id}" %>
+    <% end %>
+  </nav>
+</div>
+<div class="col-md-6 offset-md-3 show-margin">
+  <ul class="list-group">
+    <li class="list-group-item"><strong>Categories: </strong><%= @model.categories %></li>
+    <li class="list-group-item"><strong>Valid to: </strong><%= @model.valid_to%></li>
+    <li class="list-group-item"><strong>Driver: </strong><%= link_to @model.driver.info, driver_path(@model.driver) %></li>
+    <li class="list-group-item"><strong>Additional notes: </strong><%= @model.additional_notes %></li>
+    <li class="list-group-item"><strong>Actions: </strong>
+      <%= link_to 'Edit', edit_driver_license_path(@model), class: 'btn btn-success btn-sm' %>
+      <%= link_to 'Delete', driver_licenses_path(@model),
+                  class: 'btn btn-danger btn-sm', method: :delete,
+                  data: {confirm: 'Are you sure?'} %>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,42 @@
+<%= render 'layouts/application/form_errors', form: @form %>
+<%= form_for @form do |f| %>
+  <div class="col-md-8 offset-md-4">
+    <div class="form-group row">
+        <%= f.label :downloading_address, 'D/A', class: "col-form-label" %>
+      <div class="col-sm-4">
+        <%= f.text_field :downloading_address, class: 'form-control', placeholder: 'Poland, Biyalostok, Reddis 22 ' %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <%= f.label :unloading_address, 'U/A', class: "col-form-label" %>
+      <div class="col-sm-4">
+        <%= f.text_field :unloading_address, class: 'form-control', placeholder: 'Belarus, Grodno, Ozeshko 22' %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <%= f.label :cost, 'Cost', class: "col-form-label" %>
+      <div class="col-sm-4">
+        <%= f.text_field :cost, class: 'form-control', placeholder: '12$' %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <%= f.label :goods_ids, 'Goods', class: "col-form-label" %>
+      <div class="col-sm-4">
+        <%= f.select :goods_ids, goods_select, {}, class: 'form-control', prompt: 'Select customer', multiple: true %>
+      </div>
+    </div>
+    <% unless current_customer %>
+      <div class="form-group row">
+        <%= f.label :customer_id, 'C/r', class: "col-form-label" %>
+        <div class="col-sm-4">
+          <%= f.select :customer_id, customer_select, {}, class: 'form-control', prompt: 'Select customer' %>
+        </div>
+      </div>
+    <% else %>
+      <%= f.hidden_field :customer_id, value: current_customer.id %>
+    <% end %>
+    <div class="form-group offset-md-2">
+      <%= f.submit 'Submit', class: 'btn btn-success' %>
+    </div>
+  </div>
+<% end %>

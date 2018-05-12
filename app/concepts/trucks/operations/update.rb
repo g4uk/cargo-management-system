@@ -1,10 +1,10 @@
-class Trucks::Update < ApplicationOperation
+class Truck::Update < ApplicationOperation
   class Present < ApplicationOperation
-    step Model(Trucks, :find)
-    step Contract::Build(constant: Trucks::Contract::Create)
+    step Model(Truck, :find)
+    step Contract::Build(constant: Truck::Contract::Create)
   end
 
   step Nested(Present)
-  step Contract::Validate(key: :Trucks)
+  step Contract::Validate(key: :truck)
   step Contract::Persist()
 end

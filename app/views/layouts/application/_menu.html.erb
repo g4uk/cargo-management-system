@@ -24,6 +24,8 @@
           <a class="dropdown-item" href="#">as Admin</a>
         </div>
       </li>
+      <% else %>
+        <%= link_to 'lo', destroy_customer_session_path, method: :delete %>
       <% end %>
     </ul>
     </div>

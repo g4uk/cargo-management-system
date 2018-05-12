@@ -6,4 +6,8 @@ class Customer < ApplicationRecord
 
   has_many :orders, dependent: :delete_all
   has_many :goods, dependent: :delete_all
+
+  def info
+    "#{first_name} #{last_name} (#{email})"
+  end
 end

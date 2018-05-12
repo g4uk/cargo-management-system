@@ -16,4 +16,23 @@
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
+//= require bootstrap-datepicker
 //= require_tree .
+
+
+jQuery(document).ready(function(){
+    let selectedCompany = $('#company_select').val()
+    $.ajax({
+        url: '/trailers/new?selected_company_id=' + selectedCompany,
+        dataType: '',
+        type: 'GET'
+    });
+    $(document).on('change','#company_select', function() {
+        $.ajax({
+            url: '/trailers/new?selected_company_id=' + $('#company_select').val(),
+            dataType: 'html',
+            type: 'GET'
+        });
+    })});
+
+

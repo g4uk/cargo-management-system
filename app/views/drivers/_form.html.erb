@@ -1,0 +1,54 @@
+<%= render 'layouts/application/form_errors', form: @form %>
+<%= form_for @form do |f| %>
+  <div class="col-md-8 offset-md-3">
+    <div class="form-group row" >
+      <%= f.label :first_name, 'First name', class: "col-form-label" %>
+      <div class="col-sm-auto">
+        <%= f.text_field :first_name, class: 'form-control', placeholder: 'Ivan' %>
+      </div>
+      <%= f.label :last_name, 'Last name', class: "col-form-label" %>
+      <div class="col-sm-auto">
+        <%= f.text_field :last_name, class: 'form-control', placeholder: 'Ivanov' %>
+      </div>
+    </div>
+    <div class="form-group row" >
+      <%= f.label :email, 'Email', class: "col-form-label" %>
+      <div class="col-auto">
+        <%= f.email_field :email, class: 'form-control', placeholder: 'example@email.org' %>
+      </div>
+      <%= f.label :phone, 'Mobile phone', class: "col-form-label" %>
+      <div class="col-sm-auto">
+        <%= f.phone_field :phone, class: 'form-control', placeholder: '777-777-77' %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <%= f.label :password, 'Password', class: "col-form-label" %>
+      <div class="col-sm-auto">
+        <%= f.password_field :password, class: 'form-control', placeholder: '********' %>
+      </div>
+      <%= f.label :password_confirmation, 'Confirmation', class: "col-form-label" %>
+      <div class="col-sm-auto">
+        <%= f.password_field :password_confirmation, class: 'form-control', placeholder: '********' %>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-6 offset-sm-3">
+        <%= f.label :medical_examination_validity, 'Medical examination validity' %>
+      </div>
+      <div class="col-sm-6 offset-sm-3" data-provide="datepicker">
+        <%= f.text_field :medical_examination_validity, class: 'datepicker' %>
+      </div>
+    </div>
+    <div class="form-group offset-md-1">
+      <div class="col-sm-6 offset-sm-3">
+        <%= f.label :company_id, 'Company', class: 'col-form-label"' %>
+      </div>
+      <div class="col-sm-6 offset-sm-1">
+        <%= f.select :company_id, company_select, {},  class: 'form-control', propmt: 'Select company' %>
+      </div>
+    </div>
+    <div class="form-group offset-md-4">
+      <%= f.submit 'Submit', class: 'btn btn-success' %>
+    </div>
+  </div>
+<% end %>

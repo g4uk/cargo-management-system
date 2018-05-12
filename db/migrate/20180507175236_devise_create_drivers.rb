@@ -35,8 +35,8 @@ class DeviseCreateDrivers < ActiveRecord::Migration[5.2]
       t.string :first_name
       t.string :last_name
       t.string :phone, null: false
-      t.date :birth_date
-      t.date :medical_examination_validity, null: false
+      t.string :birth_date
+      t.string :medical_examination_validity, null: false
       t.string :years_of_experience
       t.string :status, default: 'Free', null: false
 

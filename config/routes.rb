@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :companies
   resources :company_owners
   resources :customers
-  resources :drviers
+  resources :drivers
   resources :driver_licenses
   resources :goods
   resources :insurance_policies

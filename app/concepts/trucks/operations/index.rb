@@ -1,7 +1,7 @@
-class Trucks::Index < ApplicationOperation
+class Truck::Index < ApplicationOperation
   step :model!
 
   def model!(options, *)
-    options[:model] = Trucks.order(updated_at: :desc)
+    options[:model] = Truck.order(updated_at: :desc)
   end
 end

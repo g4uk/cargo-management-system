@@ -1,0 +1,22 @@
+<div class="breadcrumbs">
+  <nav aria-label="breadcrumb" >
+    <%= breadcrumbs do %>
+      <%= breadcrumb 'Goods', goods_path %>
+      <%= breadcrumb "#{@model.id}" %>
+    <% end %>
+  </nav>
+</div>
+
+<ul class="list-group">
+  <li class="list-group-item"><strong>Name: </strong><%= @model.name %></li>
+  <li class="list-group-item"><strong>Weight: </strong><%= @model.weight%></li>
+  <li class="list-group-item"><strong>Volume: </strong><%= @model.volume %></li>
+  <li class="list-group-item"><strong>Goods type: </strong><%= @model.goods_type %></li>
+  <li class="list-group-item"><strong>Customer: </strong><%= link_to @model.customer.info, customer_path(@model.customer) %></li>
+  <li class="list-group-item"><strong>Actions: </strong>
+    <%= link_to 'Edit', edit_good_path(@model), class: 'btn btn-success btn-sm' %>
+    <%= link_to 'Delete', good_path(@model),
+                class: 'btn btn-danger btn-sm', method: :delete,
+                data: {confirm: 'Are you sure?'} %>
+  </li>
+</ul>

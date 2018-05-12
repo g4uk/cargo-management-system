@@ -8,4 +8,8 @@ class Driver < ApplicationRecord
   has_many :insurance_policies
   belongs_to :company, optional: true
   has_many :orders
+
+  def info
+    "#{first_name} #{last_name} (#{phone})"
+  end
 end

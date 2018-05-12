@@ -13,6 +13,12 @@
     <li class="list-group-item"><strong>Email: </strong><%= @model.email %></li>
     <li class="list-group-item"><strong>Company phone: </strong><%= @model.company_phone %></li>
     <li class="list-group-item"><strong>Mobile phone: </strong><%= @model.mobile_phone %></li>
+    <li class="list-group-item">
+      <strong>Goods: </strong><%= link_to @model.goods.count, goods_path %>
+    </li>
+    <li class="list-group-item">
+      <strong>Orders: </strong><%= link_to @model.orders.count, orders_path %>
+    </li>
     <li class="list-group-item"><strong>Actions: </strong>
       <%= link_to 'Edit', edit_customer_path(@model), class: 'btn btn-success btn-sm' %>
       <%= link_to 'Delete', customers_path(@model),

@@ -175,7 +175,7 @@ ALTER SEQUENCE public.customers_id_seq OWNED BY public.customers.id;
 CREATE TABLE public.driver_licenses (
     id bigint NOT NULL,
     categories character varying NOT NULL,
-    valid_to date NOT NULL,
+    valid_to character varying NOT NULL,
     additional_notes character varying,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
@@ -221,8 +221,8 @@ CREATE TABLE public.drivers (
     first_name character varying,
     last_name character varying,
     phone character varying NOT NULL,
-    birth_date date,
-    medical_examination_validity date NOT NULL,
+    birth_date character varying,
+    medical_examination_validity character varying NOT NULL,
     years_of_experience character varying,
     status character varying DEFAULT 'Free'::character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -323,7 +323,7 @@ ALTER SEQUENCE public.goods_orders_id_seq OWNED BY public.goods_orders.id;
 
 CREATE TABLE public.insurance_policies (
     id bigint NOT NULL,
-    valid_to date NOT NULL,
+    valid_to character varying NOT NULL,
     insurance_policy_type character varying NOT NULL,
     cost numeric NOT NULL,
     created_at timestamp without time zone NOT NULL,

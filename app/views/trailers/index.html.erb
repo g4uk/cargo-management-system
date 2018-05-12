@@ -1,0 +1,45 @@
+<div class="breadcrumbs">
+  <nav aria-label="breadcrumb" >
+    <%= breadcrumbs do %>
+      <%= breadcrumb 'Insurance policies' %>
+    <% end %>
+
+    <%= link_to 'New insurance policy', new_insurance_policy_path, class: 'btn btn-sm btn-primary action-button' %>
+  </nav>
+</div>
+
+<%= render 'search' %>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">Valid to</th>
+    <th scope="col">Insurance policy type</th>
+    <th scope="col">Cost</th>
+
+    <th scope="col">Driver</th>
+    <th scope="col" colspan="2">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @insurance_policies.each do |insurance_policy| %>
+  <tr>
+    <td><%= link_to insurance_policy.valid_to, insurance_policy_path(insurance_policy) %></td>
+    <td><%= insurance_policy.insurance_policy_type %></td>
+    <td><%= insurance_policy.cost %></td>
+    <td><%= link_to insurance_policy.driver.info, driver_path(insurance_policy.driver) %></td>
+    <td><%= link_to 'Edit', edit_insurance_policy_path(insurance_policy), class: 'btn btn-success' %></td>
+    <td><%= link_to 'Delete', insurance_policy_path(insurance_policy), method: :delete,
+                    class: 'btn btn-danger', data: { confirm: 'Are you sure?' }%></td>
+  </tr>
+  <% end %>
+  </tbody>
+  <div class="container pagination justify-content-center">
+    <%= paginate @insurance_policies %>
+  </div>
+</table>
+
+
+
+
+

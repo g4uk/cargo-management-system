@@ -1,0 +1,52 @@
+<div class="breadcrumbs">
+  <nav aria-label="breadcrumb" >
+    <%= breadcrumbs do %>
+      <%= breadcrumb 'Driver' %>
+    <% end %>
+
+    <%= link_to 'New driver', new_driver_path, class: 'btn btn-sm btn-primary action-button' %>
+  </nav>
+</div>
+
+<%= render 'search' %>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">First name</th>
+    <th scope="col">Last name</th>
+    <th scope="col">Phone</th>
+    <th scope="col">Email</th>
+    <th scope="col">ME validity</th>
+    <th scope="col">Company</th>
+    <th scope="col" colspan="2">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @drivers.each do |driver| %>
+  <tr>
+    <td><%= driver.first_name %></td>
+    <td><%= driver.last_name %></td>
+    <td><%= driver.phone %></td>
+    <td><%= link_to driver.email, driver_path(driver) %></td>
+    <td><%= driver.medical_examination_validity %></td>
+    <% if driver.company %>
+     <td><%= link_to driver.company.name, company_path(driver.company) %></td>
+    <% else %>
+     <td>N/A</td>
+    <% end %>
+    <td><%= link_to 'Edit', edit_driver_path(driver), class: 'btn btn-success' %></td>
+    <td><%= link_to 'Delete', driver_path(driver), method: :delete,
+                    class: 'btn btn-danger', data: { confirm: 'Are you sure?' }%></td>
+  </tr>
+  <% end %>
+  </tbody>
+  <div class="container pagination justify-content-center">
+    <%= paginate @drivers%>
+  </div>
+</table>
+
+
+
+
+

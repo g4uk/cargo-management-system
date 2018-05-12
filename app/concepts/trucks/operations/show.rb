@@ -1,3 +1,3 @@
-class Trucks::Show < ApplicationOperation
-  step Model(Trucks, :find)
+class Truck::Show < ApplicationOperation
+  step Model(Truck, :find)
 end
