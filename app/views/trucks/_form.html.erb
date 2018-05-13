@@ -1,0 +1,44 @@
+<%= render 'layouts/application/form_errors', form: @form %>
+<%= form_for @form do |f| %>
+  <div class="col-md-6 offset-md-3">
+    <div class=" form-group row">
+      <%= f.label :reg_number, 'Reg number', class: "col-form-label" %>
+      <div class="col">
+        <%= f.text_field :reg_number, class: 'form-control', placeholder: 'AA-0000-0' %>
+      </div>
+      <%= f.label :body_number, 'Color', class: "col-form-label" %>
+      <div class="col">
+        <%= f.text_field :body_number, class: 'form-control', placeholder: '765453685AA1242' %>
+      </div>
+    </div>
+    <div class="form-group row offset-md-4">
+        <%= f.label :year_of_issue, 'Year of issue', class: "col-form-label" %>
+      <div class="col-md-3">
+        <%= f.select :year_of_issue, (Time.now.year).downto(Time.now.year - 30).to_a, {}, class: 'form-control', prompt: 'Select year' %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <%= f.label :weight, 'Weight', class: "col-form-label" %>
+      <div class="col">
+        <%= f.text_field :weight, class: 'form-control', placeholder: '1000kg' %>
+      </div>
+      <%= f.label :color, 'Color', class: "col-form-label" %>
+      <div class="col">
+        <%= f.text_field :color, class: 'form-control', placeholder: 'Blue' %>
+      </div>
+    </div>
+      <div class="form-group row">
+        <%= f.label :company_id, 'Company', class: "col-form-label" %>
+        <div class="col">
+          <%= f.select :company_id, company_select, {prompt: 'Select company'}, class: 'form-control ', id: 'truck_company_id'%>
+        </div>
+        <%= f.label :driver_id, 'Driver', class: "col-form-label" %>
+        <div class="col">
+            <%= f.select :driver_id, '', {prompt: 'Select driver'}, class: 'form-control', id: 'truck_driver_id'%>
+        </div>
+      </div>
+    <div class="form-group offset-md-5">
+      <%= f.submit 'Submit', class: 'btn btn-success' %>
+    </div>
+  </div>
+<% end %>

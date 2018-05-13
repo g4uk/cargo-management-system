@@ -1,6 +1,6 @@
 class CompaniesController < ApplicationController
   def index
-    run Company::Index do |result|
+    run Company::Index, current_user: current_user do |result|
       @companies = search_for(result[:model]).page(params[:page])
     end
   end

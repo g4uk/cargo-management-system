@@ -1,10 +1,10 @@
 <div class="breadcrumbs">
   <nav aria-label="breadcrumb" >
     <%= breadcrumbs do %>
-      <%= breadcrumb 'Insurance policies' %>
+      <%= breadcrumb 'Trailers' %>
     <% end %>
 
-    <%= link_to 'New insurance policy', new_insurance_policy_path, class: 'btn btn-sm btn-primary action-button' %>
+    <%= link_to 'New trailer', new_trailer_path, class: 'btn btn-sm btn-primary action-button' %>
   </nav>
 </div>
 
@@ -13,29 +13,36 @@
 <table class="table">
   <thead>
   <tr>
-    <th scope="col">Valid to</th>
-    <th scope="col">Insurance policy type</th>
-    <th scope="col">Cost</th>
-
-    <th scope="col">Driver</th>
+    <th scope="col">Reg number</th>
+    <th scope="col">Color</th>
+    <th scope="col">Type</th>
+    <th scope="col">Year of issue</th>
+    <th scope="col">Truck</th>
+    <th scope="col">Company</th>
     <th scope="col" colspan="2">Actions</th>
   </tr>
   </thead>
   <tbody>
-  <% @insurance_policies.each do |insurance_policy| %>
+  <% @trailers.each do |trailer| %>
   <tr>
-    <td><%= link_to insurance_policy.valid_to, insurance_policy_path(insurance_policy) %></td>
-    <td><%= insurance_policy.insurance_policy_type %></td>
-    <td><%= insurance_policy.cost %></td>
-    <td><%= link_to insurance_policy.driver.info, driver_path(insurance_policy.driver) %></td>
-    <td><%= link_to 'Edit', edit_insurance_policy_path(insurance_policy), class: 'btn btn-success' %></td>
-    <td><%= link_to 'Delete', insurance_policy_path(insurance_policy), method: :delete,
+    <td><%= link_to trailer.reg_number, trailer_path(trailer) %></td>
+    <td><%= trailer.color %></td>
+    <td><%= trailer.trailer_type %></td>
+    <td><%= trailer.year_of_issue %></td>
+    <% if trailer.truck %>
+      <td><%= link_to trailer.truck.reg_number, truck_path(trailer.truck) %></td>
+    <% else %>
+      <td>N/A</td>
+    <% end %>
+    <td><%= link_to trailer.company.name, company_path(trailer.company) %></td>
+    <td><%= link_to 'Edit', edit_trailer_path(trailer), class: 'btn btn-success' %></td>
+    <td><%= link_to 'Delete', trailer_path(trailer), method: :delete,
                     class: 'btn btn-danger', data: { confirm: 'Are you sure?' }%></td>
   </tr>
   <% end %>
   </tbody>
   <div class="container pagination justify-content-center">
-    <%= paginate @insurance_policies %>
+    <%= paginate @trailers %>
   </div>
 </table>
 

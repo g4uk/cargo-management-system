@@ -9,7 +9,8 @@
 
 <ul class="list-group">
   <li class="list-group-item"><strong>Downloading address: </strong><%= @model.downloading_address %></li>
-  <li class="list-group-item"><strong>unloading address: </strong><%= @model.unloading_address%></li>
+  <li class="list-group-item"><strong>Unloading address: </strong><%= @model.unloading_address%></li>
+  <li class="list-group-item"><strong>Status: </strong><%= @model.status%></li>
   <li class="list-group-item"><strong>Cost: </strong><%= @model.cost %></li>
   <li class="list-group-item"><strong>Goods: </strong>
     <% @model.goods.each do |good| %>

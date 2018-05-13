@@ -1,7 +1,7 @@
 <div class="breadcrumbs">
   <nav aria-label="breadcrumb" >
     <%= breadcrumbs do %>
-      <%= breadcrumb 'Trailers', trailers_path %>
+      <%= breadcrumb 'Trucks', trucks_path %>
       <%= breadcrumb "#{@model.id}" %>
     <% end %>
   </nav>
@@ -9,21 +9,19 @@
 
 <ul class="list-group">
   <li class="list-group-item"><strong>Reg number: </strong><%= @model.reg_number %></li>
+  <li class="list-group-item"><strong>Body number: </strong><%= @model.body_number%></li>
   <li class="list-group-item"><strong>Color: </strong><%= @model.color%></li>
-  <li class="list-group-item"><strong>Type: </strong><%= @model.trailer_type %></li>
   <li class="list-group-item"><strong>Weight: </strong><%= @model.weight %></li>
-  <li class="list-group-item"><strong>Length: </strong><%= @model.length %></li>
-  <li class="list-group-item"><strong>Height: </strong><%= @model.height %></li>
-  <li class="list-group-item"><strong>Volume: </strong><%= @model.volume %></li>
-  <% if @model.truck %>
-    <li class="list-group-item"><strong>Truck: </strong><%= link_to @model.truck.reg_number, truck_path(@model.truck) %></li>
+  <li class="list-group-item"><strong>Year of issue: </strong><%= @model.year_of_issue %></li>
+  <% if @model.driver %>
+    <li class="list-group-item"><strong>Driver: </strong><%= link_to @model.driver.info, driver_path(@model.driver) %></li>
   <% else %>
-    <li class="list-group-item"><strong>Truck: </strong> N/A </li>
+    <li class="list-group-item"><strong>Driver: </strong> N/A </li>
   <% end %>
   <li class="list-group-item"><strong>Company: </strong><%= link_to @model.company.name, company_path(@model.company) %></li>
   <li class="list-group-item"><strong>Actions: </strong>
-    <%= link_to 'Edit', edit_trailer_path(@model), class: 'btn btn-success btn-sm' %>
-    <%= link_to 'Delete', trailer_path(@model),
+    <%= link_to 'Edit', edit_truck_path(@model), class: 'btn btn-success btn-sm' %>
+    <%= link_to 'Delete', truck_path(@model),
                 class: 'btn btn-danger btn-sm', method: :delete,
                 data: {confirm: 'Are you sure?'} %>
   </li>

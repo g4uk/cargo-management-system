@@ -1,0 +1,26 @@
+<div class="breadcrumbs">
+  <nav aria-label="breadcrumb" >
+    <%= breadcrumbs do %>
+      <%= breadcrumb 'Orders', orders_path %>
+      <%= breadcrumb 'Assign driver' %>
+    <% end %>
+  </nav>
+</div>
+<%= form_with url: actions_assign_driver_path do |f|%>
+  <div class="col-md-8 offset-md-3">
+    <div class="form-group row">
+        <%= f.label :company_id, 'Company', class: 'col-form-label' %>
+      <div class="col-sm-4">
+        <%= f.select :company_id, company_select, {prompt: 'Select company'}, class: 'form-control', id: 'truck_company_id' %>
+      </div>
+       <%= f.label :driver_id, 'Driver', class: 'col-form-label' %>
+      <div class="col-sm-4">
+       <%= f.select :driver_id, {}, {prompt: 'Select driver'}, class: 'form-control', id: 'truck_driver_id' %>
+      </div>
+    </div>
+    <%= f.hidden_field :order_id, value: @model.id %>
+    <div class="col-sm-auto offset-md-4">
+      <%= f.submit 'Submit', class: 'btn btn-success'%>
+    </div>
+  </div>
+<% end %>

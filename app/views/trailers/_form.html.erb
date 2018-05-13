@@ -1,37 +1,57 @@
 <%= render 'layouts/application/form_errors', form: @form %>
 <%= form_for @form do |f| %>
-  <div class="col-md-8 offset-md-3">
-    <div class="form-group row">
+  <div class="col-md-6 offset-md-3">
+    <div class=" form-group row">
       <%= f.label :reg_number, 'Reg number', class: "col-form-label" %>
-      <div class="col-sm-4">
+      <div class="col">
         <%= f.text_field :reg_number, class: 'form-control', placeholder: 'AA-0000-0' %>
       </div>
       <%= f.label :color, 'Color', class: "col-form-label" %>
-      <div class="col-sm-4">
+      <div class="col">
         <%= f.text_field :color, class: 'form-control', placeholder: 'Green' %>
       </div>
     </div>
     <div class="form-group row">
         <%= f.label :year_of_issue, 'Year of issue', class: "col-form-label" %>
-      <div class="col-sm-4">
-        <%= f.select :year_of_issue, (Time.now.year).downto(Time.now.year - 100).to_a, {}, class: 'form_control', prompt: 'Select year' %>
+      <div class="col">
+        <%= f.select :year_of_issue, (Time.now.year).downto(Time.now.year - 30).to_a, {}, class: 'form-control', prompt: 'Select year' %>
       </div>
       <%= f.label :trailer_type, 'Type', class: "col-form-label" %>
-      <div class="col-sm-4">
+      <div class="col">
         <%= f.text_field :trailer_type, class: 'form-control', placeholder: 'Long' %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <%= f.label :weight, 'Weight', class: "col-form-label" %>
+      <div class="col">
+        <%= f.text_field :weight, class: 'form-control', placeholder: '1000kg' %>
+      </div>
+      <%= f.label :length, 'Length', class: "col-form-label" %>
+      <div class="col">
+        <%= f.text_field :length, class: 'form-control', placeholder: '10m' %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <%= f.label :height, 'Height', class: "col-form-label" %>
+      <div class="col">
+        <%= f.text_field :height, class: 'form-control', placeholder: '5m' %>
+      </div>
+      <%= f.label :volume, 'Volume', class: "col-form-label" %>
+      <div class="col">
+        <%= f.text_field :volume, class: 'form-control', placeholder: '50m3' %>
       </div>
     </div>
       <div class="form-group row">
         <%= f.label :company_id, 'Company', class: "col-form-label" %>
-        <div class="col-sm-4">
-          <%= f.select :company_id, company_select, {}, class: 'form-control ', id: 'company_select', prompt: 'Select company'%>
+        <div class="col">
+          <%= f.select :company_id, company_select, {prompt: 'Select company'}, id: 'trailer_company_id', class: 'form-control '%>
         </div>
         <%= f.label :truck_id, 'Truck', class: "col-form-label" %>
-        <div class="col-sm-4">
-            <%= f.select :truck_id, '', {}, class: 'form-control', :include_blank => true, remote: true %>
+        <div class="col">
+            <%= f.select :truck_id, '', {prompt: 'Select truck'}, class: 'form-control', id: 'trailer_truck_id'%>
         </div>
       </div>
-    <div class="form-group offset-md-1">
+    <div class="form-group offset-md-5">
       <%= f.submit 'Submit', class: 'btn btn-success' %>
     </div>
   </div>

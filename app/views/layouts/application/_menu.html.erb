@@ -3,31 +3,56 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="<%= companies_path %>">Companies<span class="sr-only">(current)</span></a>
-      </li>
-    </ul>
-      <% unless current_customer || current_company_owner || current_driver %>
-        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-          <ul class="navbar-nav ml-auto">
-      <li class="nav-item dropdown active">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Log in
-        </a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="<%= new_customer_session_path %>">as Customer</a>
-          <a class="dropdown-item" href="<%= new_company_owner_session_path %>">as Company owner</a>
-          <a class="dropdown-item" href="<%= new_driver_session_path %>">as Driver</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">as Admin</a>
-        </div>
-      </li>
+
+    <% current_user = nil %>
+    <% [current_customer, current_company_owner, current_driver, current_admin].each {|user| current_user = user if user} %>
+
+    <% unless current_user %>
+      <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item dropdown active">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Log in
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="<%= new_customer_session_path %>">as Customer</a>
+              <a class="dropdown-item" href="<%= new_company_owner_session_path %>">as Company owner</a>
+              <a class="dropdown-item" href="<%= new_driver_session_path %>">as Driver</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="<%= new_admin_session_path %>">as Admin</a>
+            </div>
+          </li>
       <% else %>
-        <%= link_to 'lo', destroy_customer_session_path, method: :delete %>
-      <% end %>
-    </ul>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <% if current_company_owner %>
+          <%= render "layouts/application/menu/company_owner" %>
+        <% else %>
+          <%= render "layouts/application/menu/#{current_user.class.to_s.downcase}" %>
+        <% end %>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+       <% if current_admin %>
+        <li>
+          Logged in as <%= link_to 'admin', edit_admin_registration_path %> <%= link_to 'Log out', destroy_admin_session_path, method: :delete, class: 'btn btn-danger' %>
+        </li>
+       <% elsif current_customer %>
+          <li>
+            Logged in as <%= link_to 'customer', edit_customer_registration_path %> <%= link_to 'Log out', destroy_customer_session_path, method: :delete, class: 'btn btn-danger' %>
+          </li>
+       <% elsif current_driver %>
+          <li>
+            Logged in as <%= link_to 'driver', edit_driver_registration_path %> <%= link_to 'Log out', destroy_driver_session_path, method: :delete, class: 'btn btn-danger' %>
+          </li>
+       <% elsif current_company_owner %>
+          <li>
+            Logged in as <%= link_to 'company owner', company_owner_path(current_company_owner) %> <%= link_to 'Log out', destroy_company_owner_session_path, method: :delete, class: 'btn btn-danger' %>
+          </li>
+       <% end %>
+      </ul>
     </div>
+      <% end %>
+      </ul>
+  </div>
   </div>
 </nav>

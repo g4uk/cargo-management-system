@@ -37,6 +37,7 @@ end
                  last_name: FFaker::Name.last_name,
                  email: FFaker::Internet.unique.email,
                  password: '12345678',
+                 company_id: Company.ids.sample,
                  phone: FFaker::PhoneNumber.short_phone_number,
                  birth_date: FFaker::Time.between('1950-01-01 00:00', '1997-01-01 00:00').to_date.strftime('%m/%d/%Y'),
                  medical_examination_validity: FFaker::Time.between('2019-01-01 00:00', '2021-01-01 00:00').to_date.strftime('%m/%d/%Y'))
@@ -74,8 +75,18 @@ end
 trailer_type = %w[Long Medium Short]
 
 30.times do |_n|
-  Trailer.create!(reg_number: rand(100..1000).to_s + 'ABC', color: FFaker::Vehicle.base_color,
+  Trailer.create!(reg_number: rand(100..1000).to_s + 'ABC', color: FFaker::Vehicle.base_color.capitalize,
                   trailer_type: trailer_type[rand(0..2)], height: rand(1..6).to_s + 'm',
                   length: rand(5..18).to_s + 'm', volume: rand(10000..150000).to_s + 'm3',
                   year_of_issue: FFaker::Vehicle.year, company_id: rand(1..10))
 end
+
+Admin.create!(email: 'admin@email.com', password: '123456789')
+Driver.create!(email: 'driver@email.com', password: '12345678', company_id: Company.ids.sample,
+               phone: FFaker::PhoneNumber.short_phone_number,
+               medical_examination_validity: FFaker::Time.between('2019-01-01 00:00', '2021-01-01 00:00').to_date.strftime('%m/%d/%Y'))
+Customer.create!(email: 'customer@email.com', password: '12345678', company_phone: FFaker::PhoneNumber.short_phone_number,
+                 mobile_phone: FFaker::PhoneNumber.short_phone_number,
+                 confirmed_at: Time.now)
+CompanyOwner.create!(email: 'company_owner@email.com', password: '12345678', phone: FFaker::PhoneNumber.short_phone_number,
+                     confirmed_at: Time.now)

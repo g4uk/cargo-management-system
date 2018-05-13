@@ -35,7 +35,11 @@ class DriversController < ApplicationController
 
   def destroy
     run Driver::Delete do |result|
-      return redirect_to dirvers_path, notice: "Driver #{result[:model].first_name} removed successfully"
+      return redirect_to drivers_path, notice: "Driver #{result[:model].first_name} removed successfully"
     end
+  end
+
+  def take_order
+    run Driver::TakeOrder, current_driver: current_driver
   end
 end

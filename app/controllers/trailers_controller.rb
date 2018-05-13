@@ -7,13 +7,6 @@ class TrailersController < ApplicationController
 
   def new
     run Trailer::Create::Present
-    if params[:selected_company_id]
-      @company = Company.find(params[:selected_company_id])
-    end
-    respond_to do |format|
-      format.js
-      format.html
-    end
   end
 
   def create
@@ -43,6 +36,16 @@ class TrailersController < ApplicationController
   def destroy
     run Trailer::Delete do |result|
       return redirect_to trailers_path, notice: "Trailer #{result[:model].reg_number} removed successfully"
+    end
+  end
+
+  def truck_select
+    if params[:selected_company_id].present?
+      trucks = Company.find(params[:selected_company_id]).trucks
+    end
+    respond_to do |format|
+      format.json { render json: trucks }
+      format.html
     end
   end
 end

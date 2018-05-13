@@ -38,4 +38,14 @@ class TrucksController < ApplicationController
       return redirect_to trucks_path, notice: "Truck #{result[:model].reg_number} removed successfully"
     end
   end
+
+  def driver_select
+    if params[:selected_company_id].present?
+      drivers = Company.find(params[:selected_company_id]).drivers
+    end
+    respond_to do |format|
+      format.json { render json: drivers }
+      format.html
+    end
+  end
 end

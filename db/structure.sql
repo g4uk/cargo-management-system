@@ -27,6 +27,46 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: admins; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.admins (
+    id bigint NOT NULL,
+    email character varying DEFAULT ''::character varying NOT NULL,
+    encrypted_password character varying DEFAULT ''::character varying NOT NULL,
+    reset_password_token character varying,
+    reset_password_sent_at timestamp without time zone,
+    remember_created_at timestamp without time zone,
+    sign_in_count integer DEFAULT 0 NOT NULL,
+    current_sign_in_at timestamp without time zone,
+    last_sign_in_at timestamp without time zone,
+    current_sign_in_ip inet,
+    last_sign_in_ip inet,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: admins_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.admins_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: admins_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.admins_id_seq OWNED BY public.admins.id;
+
+
+--
 -- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -474,6 +514,13 @@ ALTER SEQUENCE public.trucks_id_seq OWNED BY public.trucks.id;
 
 
 --
+-- Name: admins id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.admins ALTER COLUMN id SET DEFAULT nextval('public.admins_id_seq'::regclass);
+
+
+--
 -- Name: companies id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -548,6 +595,14 @@ ALTER TABLE ONLY public.trailers ALTER COLUMN id SET DEFAULT nextval('public.tra
 --
 
 ALTER TABLE ONLY public.trucks ALTER COLUMN id SET DEFAULT nextval('public.trucks_id_seq'::regclass);
+
+
+--
+-- Name: admins admins_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.admins
+    ADD CONSTRAINT admins_pkey PRIMARY KEY (id);
 
 
 --
@@ -652,6 +707,20 @@ ALTER TABLE ONLY public.trailers
 
 ALTER TABLE ONLY public.trucks
     ADD CONSTRAINT trucks_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_admins_on_email; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_admins_on_email ON public.admins USING btree (email);
+
+
+--
+-- Name: index_admins_on_reset_password_token; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_admins_on_reset_password_token ON public.admins USING btree (reset_password_token);
 
 
 --
@@ -923,6 +992,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180507184600'),
 ('20180507184709'),
 ('20180507185203'),
-('20180507191450');
+('20180507191450'),
+('20180513160034');
 
 

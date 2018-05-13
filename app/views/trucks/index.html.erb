@@ -1,0 +1,52 @@
+<div class="breadcrumbs">
+  <nav aria-label="breadcrumb" >
+    <%= breadcrumbs do %>
+      <%= breadcrumb 'Trucks' %>
+    <% end %>
+
+    <%= link_to 'New truck', new_truck_path, class: 'btn btn-sm btn-primary action-button' %>
+  </nav>
+</div>
+
+<%= render 'search' %>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">Reg number</th>
+    <th scope="col">Body number</th>
+    <th scope="col">Color</th>
+    <th scope="col">Year of issue</th>
+    <th scope="col">Driver</th>
+    <th scope="col">Company</th>
+    <th scope="col" colspan="2">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @trucks.each do |truck| %>
+  <tr>
+    <td><%= link_to truck.reg_number, truck_path(truck) %></td>
+    <td><%= truck.body_number %></td>
+    <td><%= truck.color %></td>
+    <td><%= truck.year_of_issue %></td>
+    <% if truck.driver %>
+      <td><%= link_to truck.driver.info, driver_path(truck.driver) %></td>
+    <% else %>
+      <td>N/A</td>
+    <% end %>
+    <td><%= link_to truck.company.name, company_path(truck.company) %></td>
+    <td><%= link_to 'Edit', edit_truck_path(truck), class: 'btn btn-success' %></td>
+    <td><%= link_to 'Delete', truck_path(truck), method: :delete,
+                    class: 'btn btn-danger', data: { confirm: 'Are you sure?' }%></td>
+  </tr>
+  <% end %>
+  </tbody>
+  <div class="container pagination justify-content-center">
+    <%= paginate @trucks %>
+  </div>
+</table>
+
+
+
+
+
