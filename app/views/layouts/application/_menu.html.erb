@@ -34,7 +34,7 @@
       <ul class="navbar-nav ml-auto">
        <% if current_admin %>
         <li>
-          Logged in as <%= link_to 'admin', edit_admin_registration_path %> <%= link_to 'Log out', destroy_admin_session_path, method: :delete, class: 'btn btn-danger' %>
+          Logged in as admin <%= link_to 'Log out', destroy_admin_session_path, method: :delete, class: 'btn btn-danger' %>
         </li>
        <% elsif current_customer %>
           <li>
@@ -42,11 +42,11 @@
           </li>
        <% elsif current_driver %>
           <li>
-            Logged in as <%= link_to 'driver', edit_driver_registration_path %> <%= link_to 'Log out', destroy_driver_session_path, method: :delete, class: 'btn btn-danger' %>
+            Logged in as driver <%= link_to 'Log out', destroy_driver_session_path, method: :delete, class: 'btn btn-danger' %>
           </li>
        <% elsif current_company_owner %>
           <li>
-            Logged in as <%= link_to 'company owner', company_owner_path(current_company_owner) %> <%= link_to 'Log out', destroy_company_owner_session_path, method: :delete, class: 'btn btn-danger' %>
+            Logged in as <%= link_to 'company owner', edit_company_owner_registration_path %> <%= link_to 'Log out', destroy_company_owner_session_path, method: :delete, class: 'btn btn-danger' %>
           </li>
        <% end %>
       </ul>

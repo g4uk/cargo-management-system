@@ -1,6 +1,6 @@
 class InsurancePoliciesController < ApplicationController
   def index
-    run InsurancePolicy::Index do |result|
+    run InsurancePolicy::Index, current_user: current_user do |result|
       @insurance_policies = search_for(result[:model]).page(params[:page])
     end
   end

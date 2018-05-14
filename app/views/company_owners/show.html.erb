@@ -13,7 +13,7 @@
     <li class="list-group-item"><strong>Email: </strong><%= @model.email %></li>
     <li class="list-group-item"><strong>Phone: </strong><%= @model.phone %></li>
     <li class="list-group-item"><strong>Actions: </strong>
-      <%= link_to 'Edit', edit_company_owners_path(@model), class: 'btn btn-success btn-sm' %>
+      <%= link_to 'Edit', edit_company_owner_path(@model), class: 'btn btn-success btn-sm' %>
       <%= link_to 'Delete', company_owner_path(@model),
                   class: 'btn btn-danger btn-sm', method: :delete,
                   data: {confirm: 'Are you sure?'} %>

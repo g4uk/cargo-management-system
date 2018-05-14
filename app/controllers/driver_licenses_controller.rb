@@ -2,7 +2,7 @@
 
 class DriverLicensesController < ApplicationController
   def index
-    run DriverLicense::Index do |result|
+    run DriverLicense::Index, current_user: current_user do |result|
       @driver_licenses = search_for(result[:model]).page(params[:page])
     end
   end
