@@ -2,17 +2,17 @@
 
 class CompanyOwnersController < ApplicationController
   def index
-    run CompanyOwner::Index do |result|
+    handle(run(CompanyOwner::Index, current_user: current_user)) do |result|
       @company_owners = search_for(result[:model]).page(params[:page])
     end
   end
 
   def new
-    run CompanyOwner::Create::Present
+    handle(run(CompanyOwner::Create::Present, current_user: current_user))
   end
 
   def create
-    run CompanyOwner::Create do |result|
+    handle(run(CompanyOwner::Create, current_user: current_user)) do |result|
       return redirect_to company_owner_path(result[:model]),
                          notice: "Company owner #{result[:model].first_name}(#{result[:model].email}) successfully created"
     end
@@ -21,15 +21,15 @@ class CompanyOwnersController < ApplicationController
   end
 
   def show
-    run CompanyOwner::Show
+    handle(run(CompanyOwner::Show, current_user: current_user))
   end
 
   def edit
-    run CompanyOwner::Update::Present
+    handle(run(CompanyOwner::Update::Present, current_user: current_user))
   end
 
   def update
-    run CompanyOwner::Update do |result|
+    handle(run(CompanyOwner::Update, current_user: current_user)) do |result|
       return redirect_to company_owner_path(result[:model]),
                          notice: "Company owner #{result[:model].first_name}(#{result[:model].email}) successfully updated"
     end
@@ -38,7 +38,7 @@ class CompanyOwnersController < ApplicationController
   end
 
   def destroy
-    run CompanyOwner::Delete do |result|
+    handle(run(CompanyOwner::Delete, current_user: current_user)) do |result|
       return redirect_to company_owners_path,
                          notice: "Company owner #{result[:model].first_name}(#{result[:model].email}) removed successfully"
     end

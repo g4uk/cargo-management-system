@@ -1,16 +1,18 @@
+# frozen_string_literal: true
+
 class GoodsController < ApplicationController
   def index
-    run Good::Index do |result|
+    handle(run(Good::Index, current_user: current_user)) do |result|
       @goods = search_for(result[:model]).page(params[:page])
     end
   end
 
   def new
-    run Good::Create::Present
+    handle(run(Good::Create::Present, current_user: current_user))
   end
 
   def create
-    run Good::Create do |result|
+    handle(run(Good::Create, current_user: current_user)) do |result|
       return redirect_to good_path(result[:model]), notice: "Good #{result[:model].name} successfully created"
     end
 
@@ -18,15 +20,15 @@ class GoodsController < ApplicationController
   end
 
   def show
-    run Good::Show
+    handle(run(Good::Show, current_user: current_user))
   end
 
   def edit
-    run Good::Update::Present
+    handle(run(Good::Update::Present, current_user: current_user))
   end
 
   def update
-    run Good::Update do |result|
+    handle(run(Good::Update, current_user: current_user)) do |result|
       return redirect_to good_path(result[:model]), notice: "Good #{result[:model].name} successfully updated"
     end
 
@@ -34,7 +36,7 @@ class GoodsController < ApplicationController
   end
 
   def destroy
-    run Good::Delete do |result|
+    handle(run(Good::Delete, current_user: current_user)) do |result|
       return redirect_to goods_path, notice: "Good #{result[:model].name} removed successfully"
     end
   end

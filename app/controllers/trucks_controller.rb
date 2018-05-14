@@ -1,16 +1,18 @@
+# frozen_string_literal: true
+
 class TrucksController < ApplicationController
   def index
-    run Truck::Index do |result|
+    handle(run(Truck::Index, current_user: current_user)) do |result|
       @trucks = search_for(result[:model]).page(params[:page])
     end
   end
 
   def new
-    run Truck::Create::Present
+    handle(run(Truck::Create::Present, current_user: current_user))
   end
 
   def create
-    run Truck::Create do |result|
+    handle(run(Truck::Create, current_user: current_user)) do |result|
       return redirect_to truck_path(result[:model]), notice: "Truck #{result[:model].reg_number} successfully created"
     end
 
@@ -18,15 +20,15 @@ class TrucksController < ApplicationController
   end
 
   def show
-    run Truck::Show
+    handle(run(Truck::Show, current_user: current_user))
   end
 
   def edit
-    run Truck::Update::Present
+    handle(run(Truck::Update::Present, current_user: current_user))
   end
 
   def update
-    run Truck::Update do |result|
+    handle(run(Truck::Update, current_user: current_user)) do |result|
       return redirect_to truck_path(result[:model]), notice: "Truck #{result[:model].reg_number} successfully updated"
     end
 
@@ -34,7 +36,7 @@ class TrucksController < ApplicationController
   end
 
   def destroy
-    run Truck::Delete do |result|
+    handle(run(Truck::Delete, current_user: current_user)) do |result|
       return redirect_to trucks_path, notice: "Truck #{result[:model].reg_number} removed successfully"
     end
   end

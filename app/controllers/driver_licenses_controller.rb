@@ -2,17 +2,17 @@
 
 class DriverLicensesController < ApplicationController
   def index
-    run DriverLicense::Index, current_user: current_user do |result|
+    handle(run(DriverLicense::Index, current_user: current_user)) do |result|
       @driver_licenses = search_for(result[:model]).page(params[:page])
     end
   end
 
   def new
-    run DriverLicense::Create::Present
+    handle(run(DriverLicense::Create::Present, current_user: current_user))
   end
 
   def create
-    run DriverLicense::Create do |result|
+    handle(run(DriverLicense::Create, current_user: current_user)) do |result|
       return redirect_to driver_license_path(result[:model]), notice: 'Driver License successfully created'
     end
 
@@ -20,15 +20,15 @@ class DriverLicensesController < ApplicationController
   end
 
   def show
-    run DriverLicense::Show
+    handle(run(DriverLicense::Show, current_user: current_user))
   end
 
   def edit
-    run DriverLicense::Update::Present
+    handle(run(DriverLicense::Update::Present, current_user: current_user))
   end
 
   def update
-    run DriverLicense::Update do |result|
+    handle(run(DriverLicense::Update, current_user: current_user)) do |result|
       return redirect_to driver_license_path(result[:model]), notice: 'Driver Lisence successfully updated'
     end
 
@@ -36,7 +36,7 @@ class DriverLicensesController < ApplicationController
   end
 
   def destroy
-    run DriverLicense::Delete do |_result|
+    handle(run(DriverLicense::Delete, current_user: current_user)) do |_result|
       return redirect_to driver_licenses_path, notice: 'Driver License removed successfully'
     end
   end

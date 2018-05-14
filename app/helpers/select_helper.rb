@@ -11,6 +11,10 @@ module SelectHelper
     end
   end
 
+  def company_owner_select
+    CompanyOwner.all.map { |owner| [owner.info, owner.id] }
+  end
+
   def customer_select
     Customer.all.map { |customer| [customer.info, customer.id] }
   end

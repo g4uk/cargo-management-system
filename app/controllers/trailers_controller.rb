@@ -1,16 +1,18 @@
+# frozen_string_literal: true
+
 class TrailersController < ApplicationController
   def index
-    run Trailer::Index do |result|
+    handle(run(Trailer::Index, current_user: current_user)) do |result|
       @trailers = search_for(result[:model]).page(params[:page])
     end
   end
 
   def new
-    run Trailer::Create::Present
+    handle(run(Trailer::Create::Present, current_user: current_user))
   end
 
   def create
-    run Trailer::Create do |result|
+    handle(run(Trailer::Create, current_user: current_user)) do |result|
       return redirect_to trailer_path(result[:model]), notice: "Trailer #{result[:model].reg_number} successfully created"
     end
 
@@ -18,15 +20,15 @@ class TrailersController < ApplicationController
   end
 
   def show
-    run Trailer::Show
+    handle(run(Trailer::Show, current_user: current_user))
   end
 
   def edit
-    run Trailer::Update::Present
+    handle(run(Trailer::Update::Present, current_user: current_user))
   end
 
   def update
-    run Trailer::Update do |result|
+    handle(run(Trailer::Update, current_user: current_user)) do |result|
       return redirect_to trailer_path(result[:model]), notice: "Trailer #{result[:model].reg_number} successfully updated"
     end
 
@@ -34,7 +36,7 @@ class TrailersController < ApplicationController
   end
 
   def destroy
-    run Trailer::Delete do |result|
+    handle(run(Trailer::Delete, current_user: current_user)) do |result|
       return redirect_to trailers_path, notice: "Trailer #{result[:model].reg_number} removed successfully"
     end
   end

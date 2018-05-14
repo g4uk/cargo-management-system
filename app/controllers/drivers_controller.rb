@@ -1,16 +1,18 @@
+# frozen_string_literal: true
+
 class DriversController < ApplicationController
   def index
-    run Driver::Index do |result|
+    handle(run(Driver::Index, current_user: current_user)) do |result|
       @drivers = search_for(result[:model]).page(params[:page])
     end
   end
 
   def new
-    run Driver::Create::Present
+    handle(run(Driver::Create::Present, current_user: current_user))
   end
 
   def create
-    run Driver::Create do |result|
+    handle(run(Driver::Create, current_user: current_user)) do |result|
       return redirect_to driver_path(result[:model]), notice: "Driver #{result[:model].first_name} successfully created"
     end
 
@@ -18,15 +20,15 @@ class DriversController < ApplicationController
   end
 
   def show
-    run Driver::Show
+    handle(run(Driver::Show, current_user: current_user))
   end
 
   def edit
-    run Driver::Update::Present
+    handle(run(Driver::Update::Present, current_user: current_user))
   end
 
   def update
-    run Driver::Update do |result|
+    handle(run(Driver::Update, current_user: current_user)) do |result|
       return redirect_to driver_path(result[:model]), notice: "Driver #{result[:model].first_name} successfully updated"
     end
 
@@ -34,12 +36,12 @@ class DriversController < ApplicationController
   end
 
   def destroy
-    run Driver::Delete do |result|
+    handle(run(Driver::Delete, current_user: current_user)) do |result|
       return redirect_to drivers_path, notice: "Driver #{result[:model].first_name} removed successfully"
     end
   end
 
   def take_order
-    run Driver::TakeOrder, current_driver: current_driver
+    handle(run(Driver::TakeOrder, current_driver: current_driver))
   end
 end

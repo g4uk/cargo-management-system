@@ -5,4 +5,8 @@ class CompanyOwner < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :companies, dependent: :delete_all
+
+  def info
+    "#{phone}(#{email})"
+  end
 end

@@ -2,17 +2,17 @@
 
 class OrdersController < ApplicationController
   def index
-    run Order::Index, current_user: current_user do |result|
+    handle(run(Order::Index, current_user: current_user)) do |result|
       @orders = search_for(result[:model]).page(params[:page])
     end
   end
 
   def new
-    run Order::Create::Present
+    handle(run(Order::Create::Present, current_user: current_user))
   end
 
   def create
-    run Order::Create do |result|
+    handle(run(Order::Create, current_user: current_user)) do |result|
       return redirect_to order_path(result[:model]), notice: 'Order successfully created'
     end
 
@@ -20,15 +20,15 @@ class OrdersController < ApplicationController
   end
 
   def show
-    run Order::Show
+    handle(run(Order::Show, current_user: current_user))
   end
 
   def edit
-    run Order::Update::Present
+    handle(run(Order::Update::Present, current_user: current_user))
   end
 
   def update
-    run Order::Update do |result|
+    handle(run(Order::Update, current_user: current_user)) do |result|
       return redirect_to order_path(result[:model]), notice: 'Order successfully updated'
     end
 
@@ -36,17 +36,17 @@ class OrdersController < ApplicationController
   end
 
   def destroy
-    run Order::Delete do
+    handle(run(Order::Delete, current_user: current_user)) do
       return redirect_to orders_path, notice: 'Order removed successfully'
     end
   end
 
   def new_driver_assignment
-    run Order::AssignDriver::Present
+    handle(run(Order::AssignDriver::Present, current_user: current_user))
   end
 
   def assign_driver
-    run Order::AssignDriver do
+    handle(run(Order::AssignDriver, current_user: current_user)) do
       return redirect_to orders_path, notice: 'Driver was assigned successfully'
     end
 

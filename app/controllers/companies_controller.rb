@@ -1,16 +1,18 @@
+# frozen_string_literal: true
+
 class CompaniesController < ApplicationController
   def index
-    run Company::Index, current_user: current_user do |result|
+    handle(run(Company::Index, current_user: current_user)) do |result|
       @companies = search_for(result[:model]).page(params[:page])
     end
   end
 
   def new
-    run Company::Create::Present
+    handle(run(Company::Create::Present, current_user: current_user))
   end
 
   def create
-    run Company::Create do |result|
+    handle(run(Company::Create, current_user: current_user)) do |result|
       return redirect_to company_path(result[:model]), notice: "Company #{result[:model].name} successfully created"
     end
 
@@ -18,15 +20,15 @@ class CompaniesController < ApplicationController
   end
 
   def show
-    run Company::Show
+    handle(run(Company::Show, current_user: current_user))
   end
 
   def edit
-    run Company::Update::Present
+    handle(run(Company::Update::Present, current_user: current_user))
   end
 
   def update
-    run Company::Update do |result|
+    handle(run(Company::Update, current_user: current_user)) do |result|
       return redirect_to company_path(result[:model]), notice: "Company #{result[:model].name} successfully updated"
     end
 
@@ -34,7 +36,7 @@ class CompaniesController < ApplicationController
   end
 
   def destroy
-    run Company::Delete do |result|
+    handle(run(Company::Delete, current_user: current_user)) do |result|
       return redirect_to companies_path, notice: "Company #{result[:model].name} removed successfully"
     end
   end

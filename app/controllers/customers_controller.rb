@@ -1,16 +1,18 @@
+# frozen_string_literal: true
+
 class CustomersController < ApplicationController
   def index
-    run Customer::Index do |result|
+    handle(run(Customer::Index, current_user: current_user)) do |result|
       @customers = search_for(result[:model]).page(params[:page])
     end
   end
 
   def new
-    run Customer::Create::Present
+    handle(run(Customer::Create::Present, current_user: current_user))
   end
 
   def create
-    run Customer::Create do |result|
+    handle(run(Customer::Create, current_user: current_user)) do |result|
       return redirect_to customer_path(result[:model]), notice: "Customer #{result[:model].first_name} successfully created"
     end
 
@@ -18,15 +20,15 @@ class CustomersController < ApplicationController
   end
 
   def show
-    run Customer::Show
+    handle(run(Customer::Show, current_user: current_user))
   end
 
   def edit
-    run Customer::Update::Present
+    handle(run(Customer::Update::Present, current_user: current_user))
   end
 
   def update
-    run Customer::Update do |result|
+    handle(run(Customer::Update, current_user: current_user)) do |result|
       return redirect_to customer_path(result[:model]), notice: "Customer #{result[:model].first_name} successfully updated"
     end
 
@@ -34,7 +36,7 @@ class CustomersController < ApplicationController
   end
 
   def destroy
-    run Customer::Delete do |result|
+    handle(run(Customer::Delete, current_user: current_user)) do |result|
       return redirect_to customers_path, notice: "Customer #{result[:model].first_name} removed successfully"
     end
   end
