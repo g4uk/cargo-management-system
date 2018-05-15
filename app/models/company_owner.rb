@@ -7,6 +7,6 @@ class CompanyOwner < ApplicationRecord
   has_many :companies, dependent: :delete_all
 
   def info
-    "#{phone}(#{email})"
+    "#{phone} (#{email})"
   end
 end

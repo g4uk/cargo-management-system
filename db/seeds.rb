@@ -15,11 +15,11 @@
                        confirmed_at: Time.now)
 end
 
-10.times do |n|
+30.times do
   Company.create!(name: FFaker::Company.name, address: FFaker::Address.country + ' ' +
                            FFaker::Address.city + ' ' + FFaker::Address.street_address,
                   email: FFaker::Internet.unique.email, phone: FFaker::PhoneNumber.short_phone_number,
-                  company_owner_id: n + 1)
+                  company_owner_id: CompanyOwner.ids.sample)
 end
 
 15.times do

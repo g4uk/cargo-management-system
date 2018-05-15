@@ -1,4 +1,5 @@
 class CompanyOwner::Index < ApplicationOperation
+  step Policy::Pundit(CompanyOwnerPolicy, :admin?)
   step :model!
 
   def model!(options, *)

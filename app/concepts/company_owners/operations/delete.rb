@@ -1,4 +1,5 @@
 class CompanyOwner::Delete < ApplicationOperation
+  step Policy::Pundit(CompanyOwnerPolicy, :admin?)
   step Model(CompanyOwner, :find)
   step :delete!
 

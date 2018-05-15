@@ -4,8 +4,10 @@ class DriverLicense::Index < ApplicationOperation
   step :model!
 
   def model!(options, current_user:, **)
-    options[:model] = if current_user.class == Driver
+    options[:model] = if current_user.is_a?(Driver)
                         DriverLicense.where(driver_id: current_user.id).order(updated_at: :desc)
+                      elsif current_user.is_a?(CompanyOwner)
+                        DriverLicense.includes(:driver).where(driver_id: Driver.where(company_id: current_user.companies.ids).ids)
                       else
                         DriverLicense.includes(:driver).order(updated_at: :desc)
                       end

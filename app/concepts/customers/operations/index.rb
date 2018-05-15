@@ -1,4 +1,5 @@
 class Customer::Index < ApplicationOperation
+  step Policy::Pundit(CustomerPolicy, :admin?)
   step :model!
 
   def model!(options, *)

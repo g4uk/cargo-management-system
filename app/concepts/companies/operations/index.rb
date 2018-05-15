@@ -6,7 +6,7 @@ class Company::Index < ApplicationOperation
 
   def model!(options, current_user:, **)
     options[:model] = if current_user.class == Admin
-                        Company.order(updated_at: :desc)
+                        Company.includes(:company_owner).order(updated_at: :desc)
                       elsif current_user.class == CompanyOwner
                         current_user.companies.order(updated_at: :desc)
     end

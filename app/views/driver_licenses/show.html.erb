@@ -10,7 +10,9 @@
   <ul class="list-group">
     <li class="list-group-item"><strong>Categories: </strong><%= @model.categories %></li>
     <li class="list-group-item"><strong>Valid to: </strong><%= @model.valid_to%></li>
-    <li class="list-group-item"><strong>Driver: </strong><%= link_to @model.driver.info, driver_path(@model.driver) %></li>
+    <% unless current_driver %>
+      <li class="list-group-item"><strong>Driver: </strong><%= link_to @model.driver.info, driver_path(@model.driver) %></li>
+    <% end %>
     <li class="list-group-item"><strong>Additional notes: </strong><%= @model.additional_notes %></li>
     <li class="list-group-item"><strong>Actions: </strong>
       <%= link_to 'Edit', edit_driver_license_path(@model), class: 'btn btn-success btn-sm' %>

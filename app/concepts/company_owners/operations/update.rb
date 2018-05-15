@@ -1,5 +1,6 @@
 class CompanyOwner::Update < ApplicationOperation
   class Present < ApplicationOperation
+    step Policy::Pundit(CompanyOwnerPolicy, :admin?)
     step Model(CompanyOwner, :find)
     step Contract::Build(constant: CompanyOwner::Contract::Create)
   end
