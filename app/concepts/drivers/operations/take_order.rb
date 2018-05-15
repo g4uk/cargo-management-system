@@ -1,4 +1,5 @@
 class Driver::TakeOrder < ApplicationOperation
+  step Policy::Pundit(DriverPolicy, :take_order)
 
   step :assign_order_to_driver
 

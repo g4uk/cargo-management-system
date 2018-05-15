@@ -16,8 +16,9 @@
     <th scope="col">Valid to</th>
     <th scope="col">Type</th>
     <th scope="col">Cost</th>
-
-    <th scope="col">Driver</th>
+    <% unless current_driver %>
+      <th scope="col">Driver</th>
+    <% end %>
     <th scope="col" colspan="2">Actions</th>
   </tr>
   </thead>
@@ -27,7 +28,9 @@
     <td><%= link_to insurance_policy.valid_to, insurance_policy_path(insurance_policy) %></td>
     <td><%= insurance_policy.insurance_policy_type %></td>
     <td><%= insurance_policy.cost %></td>
-    <td><%= link_to insurance_policy.driver.info, driver_path(insurance_policy.driver) %></td>
+    <% unless current_driver %>
+      <td><%= link_to insurance_policy.driver.info, driver_path(insurance_policy.driver) %></td>
+    <% end %>
     <td><%= link_to 'Edit', edit_insurance_policy_path(insurance_policy), class: 'btn btn-success' %></td>
     <td><%= link_to 'Delete', insurance_policy_path(insurance_policy), method: :delete,
                     class: 'btn btn-danger', data: { confirm: 'Are you sure?' }%></td>

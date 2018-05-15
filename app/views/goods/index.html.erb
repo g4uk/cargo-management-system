@@ -3,8 +3,9 @@
     <%= breadcrumbs do %>
       <%= breadcrumb 'Goods' %>
     <% end %>
-
-    <%= link_to 'New goods', new_good_path, class: 'btn btn-sm btn-primary action-button' %>
+    <% unless current_company_owner %>
+      <%= link_to 'New goods', new_good_path, class: 'btn btn-sm btn-primary action-button' %>
+    <% end %>
   </nav>
 </div>
 
@@ -17,21 +18,29 @@
     <th scope="col">Weight</th>
     <th scope="col">Volume</th>
     <th scope="col">Goods type</th>
-    <th scope="col">Customer</th>
-    <th scope="col" colspan="2">Actions</th>
+    <% if current_admin %>
+      <th scope="col">Customer</th>
+    <% end %>
+    <% unless current_company_owner %>
+      <th scope="col" colspan="2">Actions</th>
+    <% end %>
   </tr>
   </thead>
   <tbody>
   <% @goods.each do |goods| %>
   <tr>
-    <td><%= link_to goods.name, goods_path(goods) %></td>
+    <td><%= link_to goods.name, good_path(goods) %></td>
     <td><%= goods.weight %></td>
     <td><%= goods.volume %></td>
     <td><%= goods.goods_type %></td>
-    <td><%= link_to goods.customer.email, customer_path(goods.customer) %></td>
-    <td><%= link_to 'Edit', edit_good_path(goods), class: 'btn btn-success' %></td>
-    <td><%= link_to 'Delete', good_path(goods), method: :delete,
-                    class: 'btn btn-danger', data: { confirm: 'Are you sure?' }%></td>
+    <% if current_admin %>
+      <td><%= link_to goods.customer.email, customer_path(goods.customer) %></td>
+    <% end %>
+    <% unless current_company_owner %>
+      <td><%= link_to 'Edit', edit_good_path(goods), class: 'btn btn-success' %></td>
+      <td><%= link_to 'Delete', good_path(goods), method: :delete,
+                      class: 'btn btn-danger', data: { confirm: 'Are you sure?' }%></td>
+    <% end %>
   </tr>
   <% end %>
   </tbody>

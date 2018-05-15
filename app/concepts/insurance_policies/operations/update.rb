@@ -1,6 +1,7 @@
 class InsurancePolicy::Update < ApplicationOperation
   class Present < ApplicationOperation
     step Model(InsurancePolicy, :find)
+    step Policy::Pundit(InsurancePolicyPolicy, :update)
     step Contract::Build(constant: InsurancePolicy::Contract::Create)
   end
 

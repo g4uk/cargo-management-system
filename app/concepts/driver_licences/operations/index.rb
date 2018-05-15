@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class DriverLicense::Index < ApplicationOperation
+  step Policy::Pundit(DriverLicensePolicy, :index)
   step :model!
 
   def model!(options, current_user:, **)

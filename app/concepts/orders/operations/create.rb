@@ -1,5 +1,6 @@
 class Order::Create < ApplicationOperation
   class Present < ApplicationOperation
+    step Policy::Pundit(OrderPolicy, :create)
     step Model(Order, :new)
     step Contract::Build(constant: Order::Contract::Create)
   end

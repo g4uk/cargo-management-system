@@ -81,12 +81,13 @@ trailer_type = %w[Long Medium Short]
                   year_of_issue: FFaker::Vehicle.year, company_id: rand(1..10))
 end
 
+150.times do
+  Order.create(downloading_address: FFaker::Address.country + ' ' +
+                                    FFaker::Address.city + ' ' + FFaker::Address.street_address,
+               unloading_address: FFaker::Address.country + ' ' +
+                                  FFaker::Address.city + ' ' + FFaker::Address.street_address,
+               cost: rand(1000..120_000),
+               customer_id: Customer.ids.sample)
+end
+
 Admin.create!(email: 'admin@email.com', password: '123456789')
-Driver.create!(email: 'driver@email.com', password: '12345678', company_id: Company.ids.sample,
-               phone: FFaker::PhoneNumber.short_phone_number,
-               medical_examination_validity: FFaker::Time.between('2019-01-01 00:00', '2021-01-01 00:00').to_date.strftime('%m/%d/%Y'))
-Customer.create!(email: 'customer@email.com', password: '12345678', company_phone: FFaker::PhoneNumber.short_phone_number,
-                 mobile_phone: FFaker::PhoneNumber.short_phone_number,
-                 confirmed_at: Time.now)
-CompanyOwner.create!(email: 'company_owner@email.com', password: '12345678', phone: FFaker::PhoneNumber.short_phone_number,
-                     confirmed_at: Time.now)

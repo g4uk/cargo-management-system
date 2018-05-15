@@ -1,7 +1,7 @@
 <div class="col-md-8 offset-md-3" style="margin-bottom: 15px" >
 <%= search_form_for @search, url: insurance_policies_path, method: :get, class: "form-inline my-2 my-lg-0" do |f| %>
   <%= f.search_field :valid_to_cont, class: 'form-control mr-sm-2', placeholder: 'Valid to contains' %>
-    <%= f.search_field :insurance_policy_type_cont, class: 'form-control mr-sm-2', placeholder: 'Goods contains' %>
+    <%= f.search_field :insurance_policy_type_cont, class: 'form-control mr-sm-2', placeholder: 'Type contains' %>
   <div class="form-group">
     <%= f.submit 'Search', class: 'btn btn-outline-success my-2 my-sm-0', style: 'margin-right: 10px' %>
     <%= link_to 'Reset', {}, class: 'btn btn-outline-danger my-2 my-sm-0' %>

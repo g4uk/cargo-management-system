@@ -1,4 +1,4 @@
-class DriverLicensePolicy < ApplicationPolicy
+class InsurancePolicyPolicy < ApplicationPolicy
   def initialize(user, model)
     @user = user
     @model = model

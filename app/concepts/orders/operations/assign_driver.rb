@@ -1,6 +1,7 @@
 class Order::AssignDriver < ApplicationOperation
   class Present < ApplicationOperation
     step :model!
+    step Policy::Pundit(OrderPolicy, :assign_driver)
 
     def model!(options, params:, **)
       options[:model] = Order.find(params[:order_id])

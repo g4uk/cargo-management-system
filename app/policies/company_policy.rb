@@ -10,7 +10,7 @@ class CompanyPolicy < ApplicationPolicy
 
   def show
     return true if admin?
-    return true if @user.is_a(CompanyOwner) && @model.company_owner_id == @user.id
+    return true if @user.is_a?(CompanyOwner) && @model.company_owner_id == @user.id
     return true if @user.is_a?(Driver) && @model.id == @user.company_id
     false
   end

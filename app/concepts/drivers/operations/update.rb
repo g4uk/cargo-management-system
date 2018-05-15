@@ -1,6 +1,7 @@
 class Driver::Update < ApplicationOperation
   class Present < ApplicationOperation
     step Model(Driver, :find)
+    step Policy::Pundit(DriverPolicy, :update)
     step Contract::Build(constant: Driver::Contract::Create)
   end
 
