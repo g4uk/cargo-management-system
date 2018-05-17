@@ -873,62 +873,6 @@ CREATE INDEX index_trucks_on_driver_id ON public.trucks USING btree (driver_id);
 
 
 --
--- Name: drivers fk_rails_1ae84e42c0; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.drivers
-    ADD CONSTRAINT fk_rails_1ae84e42c0 FOREIGN KEY (company_id) REFERENCES public.companies(id);
-
-
---
--- Name: orders fk_rails_3dad120da9; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.orders
-    ADD CONSTRAINT fk_rails_3dad120da9 FOREIGN KEY (customer_id) REFERENCES public.customers(id);
-
-
---
--- Name: trucks fk_rails_654a697a5e; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.trucks
-    ADD CONSTRAINT fk_rails_654a697a5e FOREIGN KEY (company_id) REFERENCES public.companies(id);
-
-
---
--- Name: orders fk_rails_704256a413; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.orders
-    ADD CONSTRAINT fk_rails_704256a413 FOREIGN KEY (driver_id) REFERENCES public.drivers(id);
-
-
---
--- Name: trucks fk_rails_77c8babecf; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.trucks
-    ADD CONSTRAINT fk_rails_77c8babecf FOREIGN KEY (driver_id) REFERENCES public.drivers(id);
-
-
---
--- Name: goods fk_rails_94aa79ce98; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.goods
-    ADD CONSTRAINT fk_rails_94aa79ce98 FOREIGN KEY (customer_id) REFERENCES public.customers(id);
-
-
---
--- Name: trailers fk_rails_969bd1d1e2; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.trailers
-    ADD CONSTRAINT fk_rails_969bd1d1e2 FOREIGN KEY (company_id) REFERENCES public.companies(id);
-
-
---
 -- Name: goods_orders fk_rails_b85d752459; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -937,43 +881,11 @@ ALTER TABLE ONLY public.goods_orders
 
 
 --
--- Name: insurance_policies fk_rails_b9b2256154; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.insurance_policies
-    ADD CONSTRAINT fk_rails_b9b2256154 FOREIGN KEY (driver_id) REFERENCES public.drivers(id);
-
-
---
--- Name: driver_licenses fk_rails_cf3d52a227; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.driver_licenses
-    ADD CONSTRAINT fk_rails_cf3d52a227 FOREIGN KEY (driver_id) REFERENCES public.drivers(id);
-
-
---
--- Name: trailers fk_rails_e9692abcf7; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.trailers
-    ADD CONSTRAINT fk_rails_e9692abcf7 FOREIGN KEY (truck_id) REFERENCES public.trucks(id);
-
-
---
 -- Name: goods_orders fk_rails_eec4783b60; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.goods_orders
     ADD CONSTRAINT fk_rails_eec4783b60 FOREIGN KEY (good_id) REFERENCES public.goods(id);
-
-
---
--- Name: companies fk_rails_fa012649f1; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.companies
-    ADD CONSTRAINT fk_rails_fa012649f1 FOREIGN KEY (company_owner_id) REFERENCES public.company_owners(id);
 
 
 --

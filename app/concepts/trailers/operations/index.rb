@@ -4,7 +4,7 @@ class Trailer::Index < ApplicationOperation
 
   def model!(options, current_user:, **)
     if current_user.is_a?(Driver)
-      options[:model] = Trailer.includes(:company, :truck).where(truck_id: current_user.truck&.id).order(updated_at: :desc)
+      options[:model] = Trailer.includes(:company, :truck).where(truck_id: Truck.where(driver_id: current_user.id).ids).order(updated_at: :desc)
     elsif current_user.is_a?(CompanyOwner)
       options[:model] = Trailer.includes(:company, :truck).where(company_id: current_user.companies.ids).order(updated_at: :desc)
     else

@@ -41,17 +41,5 @@ class AddRelationships < ActiveRecord::Migration[5.2]
       t.references :good, index: true, foreign_key: true
       t.references :order, index: true, foreign_key: true
     end
-
-    add_foreign_key :companies, :company_owners
-    add_foreign_key :drivers, :companies
-    add_foreign_key :driver_licenses, :drivers, unique: true
-    add_foreign_key :insurance_policies, :drivers, unique: true
-    add_foreign_key :orders, :customers
-    add_foreign_key :orders, :drivers
-    add_foreign_key :trucks, :drivers
-    add_foreign_key :trucks, :companies
-    add_foreign_key :trailers, :trucks
-    add_foreign_key :trailers, :companies
-    add_foreign_key :goods, :customers
   end
 end

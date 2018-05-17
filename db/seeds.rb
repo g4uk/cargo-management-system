@@ -15,14 +15,14 @@
                        confirmed_at: Time.now)
 end
 
-30.times do
+70.times do
   Company.create!(name: FFaker::Company.name, address: FFaker::Address.country + ' ' +
                            FFaker::Address.city + ' ' + FFaker::Address.street_address,
                   email: FFaker::Internet.unique.email, phone: FFaker::PhoneNumber.short_phone_number,
                   company_owner_id: CompanyOwner.ids.sample)
 end
 
-15.times do
+60.times do
   Customer.create!(first_name: FFaker::Name.first_name,
                    last_name: FFaker::Name.last_name,
                    email: FFaker::Internet.unique.email,
@@ -31,8 +31,7 @@ end
                    mobile_phone: FFaker::PhoneNumber.short_phone_number,
                    confirmed_at: Time.now)
 end
-
-30.times do
+280.times do
   Driver.create!(first_name: FFaker::Name.first_name,
                  last_name: FFaker::Name.last_name,
                  email: FFaker::Internet.unique.email,
@@ -43,32 +42,34 @@ end
                  medical_examination_validity: FFaker::Time.between('2019-01-01 00:00', '2021-01-01 00:00').to_date.strftime('%m/%d/%Y'))
 end
 
-30.times do |n|
+430.times do
   DriverLicense.create!(categories: 'ABCDE',
                         valid_to: FFaker::Time.between('2019-01-01 00:00', '2021-01-01 00:00').to_date.strftime('%m/%d/%Y'),
-                        driver_id: n + 1)
+                        driver_id: Driver.ids.sample)
 end
 
 goods_types = %w[Tech Clothes Food]
-
-100.times do
+index = 0
+180.times do
+  index += 1
+  index = 1 if (index % 60).zero?
   Good.create!(name: FFaker::Product.product_name,
                weight: rand(1..100).to_s + 'kg',
                volume: rand(1..5).to_s + 'm3',
                goods_type: goods_types[rand(0..2)],
-               customer_id: rand(1..15))
+               customer_id: index)
 end
 
-30.times do |n|
+650.times do
   InsurancePolicy.create!(valid_to: FFaker::Time.between('2019-01-01 00:00', '2021-01-01 00:00').to_date.strftime('%m/%d/%Y'),
                           insurance_policy_type: rand(1..15).to_s,
                           cost: rand(15.0..150.0).round(2),
-                          driver_id: n + 1)
+                          driver_id: Driver.ids.sample)
 end
 
-30.times do
+400.times do
   company_id = Company.ids.sample
-  driver_id = Driver.where(company_id: company_id).first&.id
+  driver_id = Driver.where(company_id: company_id).ids.sample
   Truck.create!(brand: FFaker::Vehicle.make, truck_model: FFaker::Vehicle.model,
                 reg_number: rand(100..1000).to_s + 'ABC', body_number: FFaker::Vehicle.vin,
                 color: FFaker::Vehicle.base_color, year_of_issue: FFaker::Vehicle.year,
@@ -77,16 +78,16 @@ end
 
 trailer_type = %w[Long Medium Short]
 
-30.times do |_n|
+750.times do
   company_id = Company.ids.sample
-  truck_id = Truck.where(company_id: company_id).first&.id
+  truck_id = Truck.where(company_id: company_id).ids.sample
   Trailer.create!(reg_number: rand(100..1000).to_s + 'ABC', color: FFaker::Vehicle.base_color.capitalize,
                   trailer_type: trailer_type[rand(0..2)], height: rand(1..6).to_s + 'm',
                   length: rand(5..18).to_s + 'm', volume: rand(10_000..150_000).to_s + 'm3',
                   year_of_issue: FFaker::Vehicle.year, company_id: company_id, truck_id: truck_id)
 end
 
-150.times do
+120.times do
   customer_id = Customer.ids.sample
   order = Order.create!(downloading_address: FFaker::Address.country + ' ' +
                                     FFaker::Address.city + ' ' + FFaker::Address.street_address,
@@ -94,7 +95,16 @@ end
                                   FFaker::Address.city + ' ' + FFaker::Address.street_address,
                         cost: rand(1000..120_000),
                         customer_id: customer_id)
-  rand(1..7).times { GoodsOrder.create!(order_id: order.id, good_id: Good.where(customer_id: customer_id).ids.sample) }
+  good_id = Good.where(customer_id: customer_id).ids.sample
+  if good_id
+    good_id
+  else
+    good_id = Customer.find(customer_id).goods.create!(name: FFaker::Product.product_name,
+                                                       weight: rand(1..100).to_s + 'kg',
+                                                       volume: rand(1..5).to_s + 'm3',
+                                                       goods_type: goods_types[rand(0..2)]).id
+  end
+  rand(1..7).times { GoodsOrder.create!(order_id: order.id, good_id: good_id) }
 end
 
 Admin.create!(email: 'admin@email.com', password: '123456789')
