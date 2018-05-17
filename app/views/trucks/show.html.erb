@@ -13,16 +13,18 @@
   <li class="list-group-item"><strong>Color: </strong><%= @model.color%></li>
   <li class="list-group-item"><strong>Weight: </strong><%= @model.weight %></li>
   <li class="list-group-item"><strong>Year of issue: </strong><%= @model.year_of_issue %></li>
-  <% if @model.driver %>
+  <% if @model.driver && !current_driver %>
     <li class="list-group-item"><strong>Driver: </strong><%= link_to @model.driver.info, driver_path(@model.driver) %></li>
-  <% else %>
+  <% elsif !current_driver%>
     <li class="list-group-item"><strong>Driver: </strong> N/A </li>
   <% end %>
   <li class="list-group-item"><strong>Company: </strong><%= link_to @model.company.name, company_path(@model.company) %></li>
   <li class="list-group-item"><strong>Actions: </strong>
     <%= link_to 'Edit', edit_truck_path(@model), class: 'btn btn-success btn-sm' %>
+  <% unless current_driver %>
     <%= link_to 'Delete', truck_path(@model),
                 class: 'btn btn-danger btn-sm', method: :delete,
                 data: {confirm: 'Are you sure?'} %>
+  <% end %>
   </li>
 </ul>

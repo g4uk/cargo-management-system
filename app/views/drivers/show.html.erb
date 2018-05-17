@@ -20,22 +20,24 @@
     <% if @model.truck %>
       <li class="list-group-item"><strong>Truck: </strong><%= link_to @model.truck.reg_number, truck_path(@model.truck) %></li>
     <% else %>
-      <li class="list-group-item"></li><strong>Truck: </strong> N/A </li>
+      <li class="list-group-item"><strong>Truck: </strong> N/A </li>
     <% end %>
     <% if @model.driver_license %>
       <li class="list-group-item">
         <strong>Driver License: </strong><%= link_to @model.driver_license.valid_to, driver_license_path(@model.driver_license) %></li>
     <% else %>
-      <li class="list-group-item"></li>
-      <strong>Driver License: </strong> N/A </li>
+      <li class="list-group-item">
+      <strong>Driver License: </strong> N/A
+      </li>
     <% end %>
     <% if @model.insurance_policies %>
       <li class="list-group-item">
         <strong>Insurance policies: </strong><%= link_to @model.insurance_policies.count, insurance_policies_path %>
       </li>
     <% else %>
-      <li class="list-group-item"></li>
-      <strong>Insurance policy: </strong> N/A </li>
+      <li class="list-group-item">
+      <strong>Insurance policy: </strong> N/A
+      </li>
     <% end %>
       <li class="list-group-item">
         <strong>Orders: </strong><%= link_to @model.orders.count, orders_path %>

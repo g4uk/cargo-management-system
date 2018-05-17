@@ -482,6 +482,8 @@ ALTER SEQUENCE public.trailers_id_seq OWNED BY public.trailers.id;
 
 CREATE TABLE public.trucks (
     id bigint NOT NULL,
+    brand character varying NOT NULL,
+    truck_model character varying NOT NULL,
     reg_number character varying NOT NULL,
     body_number character varying,
     weight character varying,

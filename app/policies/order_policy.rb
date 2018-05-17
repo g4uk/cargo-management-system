@@ -14,7 +14,7 @@ class OrderPolicy < ApplicationPolicy
 
   def show
     admin? || @user.is_a?(Customer) && @model.customer_id == @user_id
-    return true if @user.is_a?(Driver) && @model.driver_id == @user.id
+    return true if @user.is_a?(Driver) && (@model.driver_id == @user.id || @model.driver_id.nil?)
     @user.is_a?(CompanyOwner)
   end
 
@@ -27,6 +27,6 @@ class OrderPolicy < ApplicationPolicy
   end
 
   def assign_driver
-    admin? || @user.is_a?(Customer) && @model.customer_id == @user_id
+    admin? || @user.is_a?(CompanyOwner)
   end
 end

@@ -66,28 +66,35 @@ end
                           driver_id: n + 1)
 end
 
-30.times do |n|
-  Truck.create!(reg_number: rand(100..1000).to_s + 'ABC', body_number: FFaker::Vehicle.vin,
+30.times do
+  company_id = Company.ids.sample
+  driver_id = Driver.where(company_id: company_id).first&.id
+  Truck.create!(brand: FFaker::Vehicle.make, truck_model: FFaker::Vehicle.model,
+                reg_number: rand(100..1000).to_s + 'ABC', body_number: FFaker::Vehicle.vin,
                 color: FFaker::Vehicle.base_color, year_of_issue: FFaker::Vehicle.year,
-                company_id: rand(1..10), driver_id: n + 1)
+                company_id: company_id, driver_id: driver_id)
 end
 
 trailer_type = %w[Long Medium Short]
 
 30.times do |_n|
+  company_id = Company.ids.sample
+  truck_id = Truck.where(company_id: company_id).first&.id
   Trailer.create!(reg_number: rand(100..1000).to_s + 'ABC', color: FFaker::Vehicle.base_color.capitalize,
                   trailer_type: trailer_type[rand(0..2)], height: rand(1..6).to_s + 'm',
-                  length: rand(5..18).to_s + 'm', volume: rand(10000..150000).to_s + 'm3',
-                  year_of_issue: FFaker::Vehicle.year, company_id: rand(1..10))
+                  length: rand(5..18).to_s + 'm', volume: rand(10_000..150_000).to_s + 'm3',
+                  year_of_issue: FFaker::Vehicle.year, company_id: company_id, truck_id: truck_id)
 end
 
 150.times do
-  Order.create(downloading_address: FFaker::Address.country + ' ' +
+  customer_id = Customer.ids.sample
+  order = Order.create!(downloading_address: FFaker::Address.country + ' ' +
                                     FFaker::Address.city + ' ' + FFaker::Address.street_address,
-               unloading_address: FFaker::Address.country + ' ' +
+                        unloading_address: FFaker::Address.country + ' ' +
                                   FFaker::Address.city + ' ' + FFaker::Address.street_address,
-               cost: rand(1000..120_000),
-               customer_id: Customer.ids.sample)
+                        cost: rand(1000..120_000),
+                        customer_id: customer_id)
+  rand(1..7).times { GoodsOrder.create!(order_id: order.id, good_id: Good.where(customer_id: customer_id).ids.sample) }
 end
 
 Admin.create!(email: 'admin@email.com', password: '123456789')

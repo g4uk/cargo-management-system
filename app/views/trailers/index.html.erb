@@ -3,8 +3,9 @@
     <%= breadcrumbs do %>
       <%= breadcrumb 'Trailers' %>
     <% end %>
-
-    <%= link_to 'New trailer', new_trailer_path, class: 'btn btn-sm btn-primary action-button' %>
+    <% unless current_driver %>
+      <%= link_to 'New trailer', new_trailer_path, class: 'btn btn-sm btn-primary action-button' %>
+    <% end %>
   </nav>
 </div>
 
@@ -19,7 +20,9 @@
     <th scope="col">Year of issue</th>
     <th scope="col">Truck</th>
     <th scope="col">Company</th>
-    <th scope="col" colspan="2">Actions</th>
+    <% unless current_driver %>
+      <th scope="col" colspan="2">Actions</th>
+    <% end %>
   </tr>
   </thead>
   <tbody>
@@ -35,9 +38,11 @@
       <td>N/A</td>
     <% end %>
     <td><%= link_to trailer.company.name, company_path(trailer.company) %></td>
-    <td><%= link_to 'Edit', edit_trailer_path(trailer), class: 'btn btn-success' %></td>
-    <td><%= link_to 'Delete', trailer_path(trailer), method: :delete,
+    <% unless current_driver %>
+      <td><%= link_to 'Edit', edit_trailer_path(trailer), class: 'btn btn-success' %></td>
+      <td><%= link_to 'Delete', trailer_path(trailer), method: :delete,
                     class: 'btn btn-danger', data: { confirm: 'Are you sure?' }%></td>
+    <% end %>
   </tr>
   <% end %>
   </tbody>

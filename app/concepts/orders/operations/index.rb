@@ -6,9 +6,9 @@ class Order::Index < ApplicationOperation
 
   def model!(options, current_user:, **)
     options[:model] = if current_user.is_a?(Driver)
-                        current_user.orders.order(updated_at: :desc)
+                        Order.where(driver_id: nil).or(Order.where(driver_id: current_user.id)).order(updated_at: :desc)
                       elsif current_user.is_a?(CompanyOwner)
-                        Order.includes(:customer).where(driver_id: nil && Driver.where(company_id: current_user.companies.ids).ids).order(updated_at: :desc)
+                        Order.includes(:customer, :goods).where(driver_id: nil).or(Order.includes(:customer, :goods).where(driver_id: Driver.where(company_id: current_user.companies.ids).ids)).order(updated_at: :desc)
                       elsif current_user.is_a?(Customer)
                         current_user.orders.includes(:driver).order(updated_at: :desc)
                       else

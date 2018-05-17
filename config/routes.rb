@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :trailers
 
   post '/actions/take_order', to: 'drivers#take_order'
+  post 'actions/finish_order', to: 'drivers#finish_order'
   get '/actions/new_driver_assignment', to: 'orders#new_driver_assignment'
   post 'actions/assign_driver', to: 'orders#assign_driver'
 

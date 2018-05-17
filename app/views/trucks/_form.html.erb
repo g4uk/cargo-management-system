@@ -2,16 +2,30 @@
 <%= form_for @form do |f| %>
   <div class="col-md-6 offset-md-3">
     <div class=" form-group row">
+      <%= f.label :brand, 'Brand', class: "col-form-label" %>
+      <div class="col">
+        <%= f.text_field :brand, class: 'form-control', placeholder: 'Volvo' %>
+      </div>
+      <%= f.label :truck_model, 'Model', class: "col-form-label" %>
+      <div class="col">
+        <%= f.text_field :truck_model, class: 'form-control', placeholder: 'S800' %>
+      </div>
+    </div>
+    <div class=" form-group row">
       <%= f.label :reg_number, 'Reg number', class: "col-form-label" %>
       <div class="col">
         <%= f.text_field :reg_number, class: 'form-control', placeholder: 'AA-0000-0' %>
       </div>
-      <%= f.label :body_number, 'Color', class: "col-form-label" %>
+      <%= f.label :body_number, 'Body number', class: "col-form-label" %>
       <div class="col">
         <%= f.text_field :body_number, class: 'form-control', placeholder: '765453685AA1242' %>
       </div>
     </div>
-    <div class="form-group row offset-md-4">
+    <div class="form-group row">
+      <%= f.label :color, 'Color', class: "col-form-label" %>
+      <div class="col-auto">
+        <%= f.text_field :color, class: 'form-control', placeholder: 'Deep Purple' %>
+      </div>
         <%= f.label :year_of_issue, 'Year of issue', class: "col-form-label" %>
       <div class="col-md-3">
         <%= f.select :year_of_issue, (Time.now.year).downto(Time.now.year - 30).to_a, {}, class: 'form-control', prompt: 'Select year' %>

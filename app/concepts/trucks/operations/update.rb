@@ -1,6 +1,7 @@
 class Truck::Update < ApplicationOperation
   class Present < ApplicationOperation
     step Model(Truck, :find)
+    step Policy::Pundit(TruckPolicy, :update)
     step Contract::Build(constant: Truck::Contract::Create)
   end
 

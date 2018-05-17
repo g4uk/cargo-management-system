@@ -4,7 +4,9 @@
       <%= breadcrumb 'Trucks' %>
     <% end %>
 
-    <%= link_to 'New truck', new_truck_path, class: 'btn btn-sm btn-primary action-button' %>
+    <% unless current_driver %>
+     <%= link_to 'New truck', new_truck_path, class: 'btn btn-sm btn-primary action-button' %>
+    <% end %>
   </nav>
 </div>
 
@@ -13,11 +15,15 @@
 <table class="table">
   <thead>
   <tr>
+    <th scope="col">Brand</th>
+    <th scope="col">Model</th>
     <th scope="col">Reg number</th>
     <th scope="col">Body number</th>
     <th scope="col">Color</th>
     <th scope="col">Year of issue</th>
-    <th scope="col">Driver</th>
+    <% unless current_driver %>
+      <th scope="col">Driver</th>
+    <% end %>
     <th scope="col">Company</th>
     <th scope="col" colspan="2">Actions</th>
   </tr>
@@ -25,19 +31,23 @@
   <tbody>
   <% @trucks.each do |truck| %>
   <tr>
+    <td><%= truck.brand %></td>
+    <td><%= truck.truck_model %></td>
     <td><%= link_to truck.reg_number, truck_path(truck) %></td>
     <td><%= truck.body_number %></td>
     <td><%= truck.color %></td>
     <td><%= truck.year_of_issue %></td>
-    <% if truck.driver %>
+    <% if truck.driver && !current_driver %>
       <td><%= link_to truck.driver.info, driver_path(truck.driver) %></td>
-    <% else %>
+    <% elsif !current_driver %>
       <td>N/A</td>
     <% end %>
     <td><%= link_to truck.company.name, company_path(truck.company) %></td>
     <td><%= link_to 'Edit', edit_truck_path(truck), class: 'btn btn-success' %></td>
-    <td><%= link_to 'Delete', truck_path(truck), method: :delete,
-                    class: 'btn btn-danger', data: { confirm: 'Are you sure?' }%></td>
+    <% unless current_driver %>
+      <td><%= link_to 'Delete', truck_path(truck), method: :delete,
+                      class: 'btn btn-danger', data: { confirm: 'Are you sure?' }%></td>
+    <% end %>
   </tr>
   <% end %>
   </tbody>

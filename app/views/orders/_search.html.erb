@@ -1,8 +1,9 @@
-<div class="col-md-8 offset-md-2" style="margin-bottom: 15px" >
+<div class="col-md-10 offset-md-1" style="margin-bottom: 15px" >
 <%= search_form_for @search, url: orders_path, method: :get, class: "form-inline my-2 my-lg-0" do |f| %>
-  <%= f.search_field :downloading_address, class: 'form-control mr-sm-2', placeholder: 'D/A contains' %>
-    <%= f.search_field :unloading_address, class: 'form-control mr-sm-2', placeholder: 'U/A contains' %>
+  <%= f.search_field :downloading_address_cont, class: 'form-control mr-sm-2', placeholder: 'D/A contains' %>
+    <%= f.search_field :unloading_address_cont, class: 'form-control mr-sm-2', placeholder: 'U/A contains' %>
     <%= f.search_field :cost_eq, class: 'form-control mr-sm-2', placeholder: 'Cost equals' %>
+    <%= f.search_field :status_cont, class: 'form-control mr-sm-2', placeholder: 'Status equals' %>
   <div class="form-group">
     <%= f.submit 'Search', class: 'btn btn-outline-success my-2 my-sm-0', style: 'margin-right: 10px' %>
     <%= link_to 'Reset', {}, class: 'btn btn-outline-danger my-2 my-sm-0' %>

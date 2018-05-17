@@ -38,8 +38,8 @@ class AddRelationships < ActiveRecord::Migration[5.2]
     end
 
     change_table :goods_orders do |t|
-      t.belongs_to :good, index: true
-      t.belongs_to :order, index: true
+      t.references :good, index: true, foreign_key: true
+      t.references :order, index: true, foreign_key: true
     end
 
     add_foreign_key :companies, :company_owners
@@ -53,7 +53,5 @@ class AddRelationships < ActiveRecord::Migration[5.2]
     add_foreign_key :trailers, :trucks
     add_foreign_key :trailers, :companies
     add_foreign_key :goods, :customers
-    add_foreign_key :goods_orders, :orders
-    add_foreign_key :goods_orders, :goods
   end
 end

@@ -4,7 +4,9 @@
       <%= breadcrumb 'Orders' %>
     <% end %>
 
-    <%= link_to 'New order', new_order_path, class: 'btn btn-sm btn-primary action-button' %>
+    <% if current_admin || current_customer %>
+      <%= link_to 'New order', new_order_path, class: 'btn btn-sm btn-primary action-button' %>
+    <% end %>
   </nav>
 </div>
 
@@ -19,9 +21,17 @@
     <th scope="col">Status</th>
     <th scope="col">Cost</th>
     <th scope="col">Goods</th>
-    <th scope="col" class="text-center">Customer</th>
-    <th scope="col">Driver</th>
-    <th scope="col" colspan="2">Actions</th>
+    <% unless current_customer %>
+      <th scope="col" class="text-center">Customer</th>
+    <% end %>
+    <% if current_driver %>
+      <th scope="col">Action</th>
+    <% elsif !current_customer %>
+      <th scope="col">Driver</th>
+    <% end %>
+    <% if current_admin || current_customer %>
+      <th scope="col" colspan="2">Actions</th>
+    <% end %>
   </tr>
   </thead>
   <tbody>
@@ -33,20 +43,28 @@
     <td><%= order.status %></td>
     <td><%= order.cost %></td>
     <td class="text-center"><%= order.goods.count %></td>
-    <td><%= link_to order.customer.info, customer_path(order.customer) %></td>
-    <% if order.driver %>
+    <% if current_admin %>
+      <td><%= link_to order.customer.info, customer_path(order.customer) %></td>
+    <% elsif !current_customer %>
+      <td><%= order.customer.info %></td>
+    <% end %>
+    <% if order.driver && !current_customer && !current_driver %>
       <td><%= link_to order.driver.info, driver_path(order.driver) %></td>
     <% elsif !order.driver && current_driver %>
       <td><%= link_to 'Take order', actions_take_order_path(driver_id: current_driver.id,
-                                                            order_id: order.id),
+                                                            order_id: order.id), method: :post,
                       class: 'btn btn-outline-primary'%></td>
-    <% else %>
+    <% elsif order.driver && current_driver && order.status != 'Completed' %>
+      <td><%= link_to 'Finish order', actions_finish_order_path(order_id: order.id), method: :post, class: 'btn btn-outline-success'  %></td>
+    <% elsif !current_driver && !current_customer %>
       <td><%= link_to 'Assign driver', actions_new_driver_assignment_path(order_id: order.id),
                       class: 'btn btn-outline-primary'%></td>
     <% end %>
-    <td><%= link_to 'Edit', edit_order_path(order), class: 'btn btn-success' %></td>
-    <td><%= link_to 'Delete', order_path(order), method: :delete,
+    <% if current_admin || current_customer %>
+      <td><%= link_to 'Edit', edit_order_path(order), class: 'btn btn-success' %></td>
+      <td><%= link_to 'Delete', order_path(order), method: :delete,
                     class: 'btn btn-danger', data: { confirm: 'Are you sure?' }%></td>
+    <% end %>
   </tr>
   <% end %>
   </tbody>

@@ -41,6 +41,7 @@
         <%= f.text_field :volume, class: 'form-control', placeholder: '50m3' %>
       </div>
     </div>
+    <% unless current_driver %>
       <div class="form-group row">
         <%= f.label :company_id, 'Company', class: "col-form-label" %>
         <div class="col">
@@ -51,6 +52,7 @@
             <%= f.select :truck_id, '', {prompt: 'Select truck'}, class: 'form-control', id: 'trailer_truck_id'%>
         </div>
       </div>
+    <% end %>
     <div class="form-group offset-md-5">
       <%= f.submit 'Submit', class: 'btn btn-success' %>
     </div>

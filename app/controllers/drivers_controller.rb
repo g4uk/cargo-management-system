@@ -42,6 +42,14 @@ class DriversController < ApplicationController
   end
 
   def take_order
-    handle(run(Driver::TakeOrder, current_driver: current_driver))
+    handle(run(Driver::TakeOrder, current_user: current_user)) do
+      redirect_to orders_path, notice: 'Order has been taken successfully!'
+    end
+  end
+
+  def finish_order
+    handle(run(Driver::FinishOrder, current_user: current_user)) do
+      redirect_to orders_path, notice: 'Order status was changed to completed!'
+    end
   end
 end

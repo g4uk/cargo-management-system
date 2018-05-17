@@ -1,8 +1,9 @@
-<div class="col-md-12 offset-md-1" style="margin-bottom: 15px" >
+<div class="col-md-12 offset-sm-1" style="margin-bottom: 15px" >
 <%= search_form_for @search, url: trucks_path, method: :get, class: "form-inline my-2 my-lg-0" do |f| %>
-  <%= f.search_field :reg_number_cont, class: 'form-control mr-sm-2', placeholder: 'Reg number contains' %>
-    <%= f.search_field :body_number_cont, class: 'form-control mr-sm-2', placeholder: 'Body number contains' %>
-    <%= f.search_field :year_of_issue_eq, class: 'form-control mr-sm-2', placeholder: 'Year of issue equals' %>
+    <%= f.search_field :brand_cont, class: 'form-control mr-sm-2', placeholder: 'Brand contains' %>
+    <%= f.search_field :truck_model_cont, class: 'form-control mr-sm-2', placeholder: 'Model contains' %>
+    <%= f.search_field :reg_number_cont, class: 'form-control mr-sm-2', placeholder: 'Reg number contains' %>
+    <%= f.search_field :year_of_issue_eq, class: 'form-control mr-sm-2 col-sm-2', placeholder: 'Year of issue equals' %>
   <div class="form-group">
     <%= f.submit 'Search', class: 'btn btn-outline-success my-2 my-sm-0', style: 'margin-right: 10px' %>
     <%= link_to 'Reset', {}, class: 'btn btn-outline-danger my-2 my-sm-0' %>

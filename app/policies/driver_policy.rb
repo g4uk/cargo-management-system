@@ -15,18 +15,25 @@ class DriverPolicy < ApplicationPolicy
   end
 
   def show
+    return false if @user.is_a?(Driver)
     admin? || @model.id.in?(Driver.where(company_id: @user.companies.ids).ids)
   end
 
   def update
+    return false if @user.is_a?(Driver)
     admin? || @model.id.in?(Driver.where(company_id: @user.companies.ids).ids)
   end
 
   def delete
+    return false if @user.is_a?(Driver)
     admin? || @model.id.in?(Driver.where(company_id: @user.companies.ids).ids)
   end
 
   def take_order
+    @user.is_a?(Driver)
+  end
+
+  def finish_order
     @user.is_a?(Driver)
   end
 end
