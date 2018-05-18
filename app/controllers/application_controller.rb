@@ -3,6 +3,7 @@
 class ApplicationController < ActionController::Base
   include Search
   include Handler
+  include User
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   rescue_from Handler::RequestError do |exception|

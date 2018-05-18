@@ -6,6 +6,7 @@ class Customer < ApplicationRecord
 
   has_many :orders, dependent: :delete_all
   has_many :goods, dependent: :delete_all
+  validates :company_phone, :mobile_phone, presence: true
 
   def info
     "#{first_name} #{last_name} (#{email})"

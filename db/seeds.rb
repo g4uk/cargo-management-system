@@ -60,9 +60,10 @@ index = 0
                customer_id: index)
 end
 
+type = %w[Full RU BY EU]
 650.times do
   InsurancePolicy.create!(valid_to: FFaker::Time.between('2019-01-01 00:00', '2021-01-01 00:00').to_date.strftime('%m/%d/%Y'),
-                          insurance_policy_type: rand(1..15).to_s,
+                          insurance_policy_type: type.sample,
                           cost: rand(15.0..150.0).round(2),
                           driver_id: Driver.ids.sample)
 end
