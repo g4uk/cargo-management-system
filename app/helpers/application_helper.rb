@@ -1,5 +1,6 @@
 module ApplicationHelper
   include Breadcrumbs
+  include DeviseHelper
 
   def notification_class_for(flash_type)
     {

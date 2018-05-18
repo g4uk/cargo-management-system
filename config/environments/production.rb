@@ -40,6 +40,18 @@ Rails.application.configure do
 
   # Store uploaded files on the local file system (see config/storage.yml for options)
   config.active_storage.service = :local
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+      address: 'smtp.mail.ru',
+      port: '465',
+      user_name: ENV['mailer_email'],
+      password: ENV['mailer_password'],
+      authentication: 'plain',
+      enable_starttls_auto: true,
+      tls: true
+  }
 
   # Mount Action Cable outside main process or domain
   # config.action_cable.mount_path = nil
@@ -52,6 +64,7 @@ Rails.application.configure do
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
   config.log_level = :debug
+  config.action_mailer.default_url_options = { host: 'cargo-management.herokuapp.com' }
 
   # Prepend all log lines with the following tags.
   config.log_tags = [ :request_id ]
