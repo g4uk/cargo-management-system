@@ -15,14 +15,14 @@
 <table class="table">
   <thead>
   <tr>
-    <th scope="col">#</th>
-    <th scope="col">Downloading address</th>
-    <th scope="col">Unloading address</th>
-    <th scope="col">Status</th>
-    <th scope="col">Cost</th>
+    <th scope="col"><%= sort_link @search, :id, '#' %></th>
+    <th scope="col"><%= sort_link @search, :downloading_address, 'Downloading address' %></th>
+    <th scope="col"><%= sort_link @search, :unloading_address, 'Unloading address' %></th>
+    <th scope="col"><%= sort_link @search, :status, 'Status' %></th>
+    <th scope="col"><%= sort_link @search, :cost, 'Cost' %></th>
     <th scope="col">Goods</th>
     <% unless current_customer %>
-      <th scope="col" class="text-center">Customer</th>
+      <th scope="col" class="text-center"><%= sort_link @search, :customer_id, 'Valid to' %></th>
     <% end %>
     <% if current_driver %>
       <th scope="col">Action</th>

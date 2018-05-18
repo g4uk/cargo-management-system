@@ -13,12 +13,12 @@
 <table class="table">
   <thead>
   <tr>
-    <th scope="col">First name</th>
-    <th scope="col">Last name</th>
-    <th scope="col">Phone</th>
-    <th scope="col">Email</th>
-    <th scope="col">ME validity</th>
-    <th scope="col">Company</th>
+    <th scope="col"><%= sort_link @search, :first_name, 'First name' %></th>
+    <th scope="col"><%= sort_link @search, :last_name, 'Last name' %></th>
+    <th scope="col"><%= sort_link @search, :phone, 'Phone' %></th>
+    <th scope="col"><%= sort_link @search, :email, 'Email' %></th>
+    <th scope="col"><%= sort_link @search, :medical_examination_validity, 'ME validity' %></th>
+    <th scope="col"><%= sort_link @search, :company_id, 'Company' %></th>
     <th scope="col" colspan="2">Actions</th>
   </tr>
   </thead>

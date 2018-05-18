@@ -3,6 +3,6 @@ class CompanyOwner::Index < ApplicationOperation
   step :model!
 
   def model!(options, *)
-    options[:model] = CompanyOwner.order(updated_at: :desc)
+    options[:model] = CompanyOwner.order(first_name: :asc)
   end
 end

@@ -6,9 +6,9 @@ class Driver::Index < ApplicationOperation
 
   def model!(options, current_user:, **)
     options[:model] = if current_user.is_a?(CompanyOwner)
-                        Driver.where(company_id: current_user.companies.ids)
+                        Driver.where(company_id: current_user.companies.ids).order(first_name: :asc)
                       else
-                        Driver.includes(:company).order(updated_at: :desc)
+                        Driver.includes(:company).order(first_name: :asc)
                       end
   end
 end

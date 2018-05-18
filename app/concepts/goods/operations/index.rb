@@ -6,9 +6,9 @@ class Good::Index < ApplicationOperation
 
   def model!(options, current_user:, **)
     options[:model] = if current_user.is_a?(Customer)
-                        Good.where(customer_id: current_user.id)
+                        Good.where(customer_id: current_user.id).order(name: :asc)
                       else
-                        Good.includes(:customer).order(updated_at: :desc)
+                        Good.includes(:customer).order(name: :asc)
                       end
   end
 end

@@ -13,11 +13,11 @@
 <table class="table">
   <thead>
   <tr>
-    <th scope="col">Valid to</th>
-    <th scope="col">Type</th>
-    <th scope="col">Cost</th>
+    <th scope="col"><%= sort_link @search, :valid_to, 'Valid to' %></th>
+    <th scope="col"><%= sort_link @search, :insurance_policy_type, 'Type' %></th>
+    <th scope="col"><%= sort_link @search, :cost, 'Cost' %></th>
     <% unless current_driver %>
-      <th scope="col">Driver</th>
+      <th scope="col"><%= sort_link @search, :driver_id, 'Driver' %></th>
     <% end %>
     <th scope="col" colspan="2">Actions</th>
   </tr>

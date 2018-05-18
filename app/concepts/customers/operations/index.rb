@@ -3,6 +3,6 @@ class Customer::Index < ApplicationOperation
   step :model!
 
   def model!(options, *)
-    options[:model] = Customer.order(updated_at: :desc)
+    options[:model] = Customer.order(first_name: :asc)
   end
 end

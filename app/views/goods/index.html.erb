@@ -14,12 +14,12 @@
 <table class="table">
   <thead>
   <tr>
-    <th scope="col">Name</th>
-    <th scope="col">Weight</th>
-    <th scope="col">Volume</th>
-    <th scope="col">Goods type</th>
+    <th scope="col"><%= sort_link @search, :name, 'Name' %></th>
+    <th scope="col"><%= sort_link @search, :weight, 'Weight' %></th>
+    <th scope="col"><%= sort_link @search, :volume, 'Volume' %></th>
+    <th scope="col"><%= sort_link @search, :goods_type, 'Type' %></th>
     <% if current_admin %>
-      <th scope="col">Customer</th>
+      <th scope="col"><%= sort_link @search, :customer_id, 'Customer' %></th>
     <% end %>
     <% unless current_company_owner %>
       <th scope="col" colspan="2">Actions</th>

@@ -13,11 +13,11 @@
 <table class="table">
   <thead>
   <tr>
-    <th scope="col">First name</th>
-    <th scope="col">Last name</th>
-    <th scope="col">Company phone</th>
-    <th scope="col">Mobile phone</th>
-    <th scope="col">Email</th>
+    <th scope="col"><%= sort_link @search, :first_name, 'First name' %></th>
+    <th scope="col"><%= sort_link @search, :last_name, 'Last name' %></th>
+    <th scope="col"><%= sort_link @search, :company_phone, 'Company phone' %></th>
+    <th scope="col"><%= sort_link @search, :mobile_phone, 'Mobile phone' %></th>
+    <th scope="col"><%= sort_link @search, :email, 'Email' %></th>
     <th scope="col" colspan="2">Actions</th>
   </tr>
   </thead>
