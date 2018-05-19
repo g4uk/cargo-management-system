@@ -11,8 +11,12 @@
   <li class="list-group-item"><strong>Valid to: </strong><%= @model.valid_to %></li>
   <li class="list-group-item"><strong>Type: </strong><%= @model.insurance_policy_type%></li>
   <li class="list-group-item"><strong>Cost: </strong><%= @model.cost %></li>
-  <% unless current_driver %>
-    <li class="list-group-item"><strong>Driver: </strong><%= link_to @model.driver.info, driver_path(@model.driver) %></li>
+  <% if @model.driver%>
+    <% unless current_driver %>
+      <li class="list-group-item"><strong>Driver: </strong><%= link_to @model.driver.info, driver_path(@model.driver) %></li>
+    <% end %>
+  <% else %>
+    <li class="list-group-item"><strong>Driver: </strong> N/A </li>
   <% end %>
   <li class="list-group-item"><strong>Actions: </strong>
     <%= link_to 'Edit', edit_insurance_policy_path(@model), class: 'btn btn-success btn-sm' %>

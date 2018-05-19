@@ -20,7 +20,13 @@
   <% elsif !current_driver%>
     <li class="list-group-item"><strong>Driver: </strong> N/A </li>
   <% end %>
-  <li class="list-group-item"><strong>Company: </strong><%= link_to @model.company.name, company_path(@model.company) %></li>
+  <% if @model.company %>
+    <li class="list-group-item"><strong>Company: </strong><%= link_to @model.company.name, company_path(@model.company) %></li>
+  <%else %>
+    <li class="list-group-item">
+      <strong>Company: </strong>N/A</li>
+  <% end %>
+
   <li class="list-group-item"><strong>Actions: </strong>
     <%= link_to 'Edit', edit_truck_path(@model), class: 'btn btn-success btn-sm' %>
   <% unless current_driver %>

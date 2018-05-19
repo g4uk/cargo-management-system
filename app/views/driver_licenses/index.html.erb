@@ -28,8 +28,12 @@
     <td><%= link_to driver_license.id, driver_license_path(driver_license) %></td>
     <td><%= driver_license.categories %></td>
     <td><%= driver_license.valid_to %></td>
-    <% unless current_driver %>
-      <td><%= link_to driver_license.driver.info, driver_path(driver_license.driver) %></td>
+    <% unless current_driver  %>
+      <% if driver_license.driver %>
+        <td><%= link_to driver_license.driver.info, driver_path(driver_license.driver) %></td>
+      <% else %>
+        <td> N/A </td>
+      <% end %>
     <% end %>
     <td><%= link_to 'Edit', edit_driver_license_path(driver_license), class: 'btn btn-success' %></td>
     <td><%= link_to 'Delete', driver_license_path(driver_license), method: :delete,

@@ -1,7 +1,7 @@
 module SelectHelper
   def driver_select
     if current_company_owner
-      Driver.where(company_id: current_company_owner.companies.ids).order(name: :asc).map { |driver| [driver.info, driver.id] }
+      Driver.where(company_id: current_company_owner.companies.order(name: :asc).ids).map { |driver| [driver.info, driver.id] }
     else
       Driver.all.order(first_name: :asc).map { |driver| [driver.info, driver.id] }
     end
@@ -25,7 +25,7 @@ module SelectHelper
 
   def goods_select
     if current_customer
-      current_customer.goods.map { |good| [good.info, good.id] }
+      current_customer.goods.order(name: :asc).map { |good| [good.info, good.id] }
     else
       Good.all.order(name: :asc).map { |good| [good.info, good.id] }
     end

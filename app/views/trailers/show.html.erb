@@ -20,7 +20,13 @@
   <% else %>
     <li class="list-group-item"><strong>Truck: </strong> N/A </li>
   <% end %>
-  <li class="list-group-item"><strong>Company: </strong><%= link_to @model.company.name, company_path(@model.company) %></li>
+  <% if @model.company %>
+    <li class="list-group-item">
+      <strong>Company: </strong><%= link_to @model.company.name, company_path(@model.company) %></li>
+  <% else %>
+    <li class="list-group-item">
+      <strong>Company: </strong>N/A</li>
+  <% end %>
   <li class="list-group-item"><strong>Actions: </strong>
     <%= link_to 'Edit', edit_trailer_path(@model), class: 'btn btn-success btn-sm' %>
     <%= link_to 'Delete', trailer_path(@model),

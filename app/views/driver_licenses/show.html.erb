@@ -11,7 +11,11 @@
     <li class="list-group-item"><strong>Categories: </strong><%= @model.categories %></li>
     <li class="list-group-item"><strong>Valid to: </strong><%= @model.valid_to%></li>
     <% unless current_driver %>
-      <li class="list-group-item"><strong>Driver: </strong><%= link_to @model.driver.info, driver_path(@model.driver) %></li>
+      <% if @model.driver %>
+        <li class="list-group-item"><strong>Driver: </strong><%= link_to @model.driver.info, driver_path(@model.driver) %></li>
+      <% else %>
+        <li class="list-group-item"><strong>Driver: </strong> N/A </li>
+      <% end %>
     <% end %>
     <li class="list-group-item"><strong>Additional notes: </strong><%= @model.additional_notes %></li>
     <li class="list-group-item"><strong>Actions: </strong>
