@@ -33,7 +33,7 @@
         </div>
       </div>
     <% else %>
-      <%= f.hidden_field :driver_id, value: current_customer.id %>
+      <%= f.hidden_field :customer_id, value: current_customer.id %>
     <% end %>
     <div class="form-group offset-md-1">
       <%= f.submit 'Submit', class: 'btn btn-success' %>

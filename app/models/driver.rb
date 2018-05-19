@@ -4,10 +4,10 @@ class Driver < ApplicationRecord
   devise :database_authenticatable, :rememberable, :trackable, :validatable
 
   has_one :driver_license, dependent: :delete
-  has_one :truck
-  has_many :insurance_policies
+  has_one :truck, dependent: :nullify
+  has_many :insurance_policies, dependent: :delete_all
   belongs_to :company, optional: true
-  has_many :orders
+  has_many :orders, dependent: :nullify
 
   def info
     "#{first_name} #{last_name} (#{phone})"

@@ -22,7 +22,7 @@
     <th scope="col"><%= sort_link @search, :cost, 'Cost' %></th>
     <th scope="col">Goods</th>
     <% unless current_customer %>
-      <th scope="col" class="text-center"><%= sort_link @search, :customer_id, 'Valid to' %></th>
+      <th scope="col" class="text-center"><%= sort_link @search, :customer_id, 'Customer' %></th>
     <% end %>
     <% if current_driver %>
       <th scope="col">Action</th>

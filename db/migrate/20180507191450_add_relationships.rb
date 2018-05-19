@@ -38,8 +38,8 @@ class AddRelationships < ActiveRecord::Migration[5.2]
     end
 
     change_table :goods_orders do |t|
-      t.references :good, index: true, foreign_key: true
-      t.references :order, index: true, foreign_key: true
+      t.references :good, index: true, foreign_key: false
+      t.references :order, index: true, foreign_key: false
     end
   end
 end

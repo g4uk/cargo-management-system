@@ -41,6 +41,7 @@
         <%= f.text_field :color, class: 'form-control', placeholder: 'Blue' %>
       </div>
     </div>
+    <% unless current_driver %>
       <div class="form-group row">
         <%= f.label :company_id, 'Company', class: "col-form-label" %>
         <div class="col">
@@ -51,6 +52,7 @@
             <%= f.select :driver_id, '', {prompt: 'Select driver'}, class: 'form-control', id: 'truck_driver_id'%>
         </div>
       </div>
+    <% end %>
     <div class="form-group offset-md-5">
       <%= f.submit 'Submit', class: 'btn btn-success' %>
     </div>

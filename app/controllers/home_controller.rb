@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    @user = [Admin.last, CompanyOwner.last, Customer.last, Driver.last]
+    @user = [Admin.first, CompanyOwner.first, Customer.first, Driver.first]
   end
 end

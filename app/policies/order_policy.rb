@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OrderPolicy < ApplicationPolicy
   def initialize(user, model)
     @user = user
@@ -13,17 +15,18 @@ class OrderPolicy < ApplicationPolicy
   end
 
   def show
-    admin? || @user.is_a?(Customer) && @model.customer_id == @user_id
+    return true if admin?
+    return true if @user.is_a?(Customer) && @model.customer_id == @user.id
     return true if @user.is_a?(Driver) && (@model.driver_id == @user.id || @model.driver_id.nil?)
     @user.is_a?(CompanyOwner)
   end
 
   def update
-    admin? || @user.is_a?(Customer) && @model.customer_id == @user_id
+    admin? || (@user.is_a?(Customer) && @model.customer_id == @user.id)
   end
 
   def delete
-    admin? || @user.is_a?(Customer) && @model.customer_id == @user_id
+    admin? || (@user.is_a?(Customer) && @model.customer_id == @user.id)
   end
 
   def assign_driver

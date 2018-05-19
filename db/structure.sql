@@ -873,22 +873,6 @@ CREATE INDEX index_trucks_on_driver_id ON public.trucks USING btree (driver_id);
 
 
 --
--- Name: goods_orders fk_rails_b85d752459; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.goods_orders
-    ADD CONSTRAINT fk_rails_b85d752459 FOREIGN KEY (order_id) REFERENCES public.orders(id);
-
-
---
--- Name: goods_orders fk_rails_eec4783b60; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.goods_orders
-    ADD CONSTRAINT fk_rails_eec4783b60 FOREIGN KEY (good_id) REFERENCES public.goods(id);
-
-
---
 -- PostgreSQL database dump complete
 --
 

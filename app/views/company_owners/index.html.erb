@@ -28,7 +28,7 @@
     <td><%= company_owner.phone %></td>
     <td><%= link_to company_owner.email, company_owner_path(company_owner) %></td>
     <td><%= link_to 'Edit', edit_company_owner_path(company_owner), class: 'btn btn-success' %></td>
-    <td><%= link_to 'Delete', company_owners_path(company_owner), method: :delete,
+    <td><%= link_to 'Delete', company_owner_path(company_owner), method: :delete,
                     class: 'btn btn-danger', data: { confirm: 'Are you sure?' }%></td>
   </tr>
   <% end %>

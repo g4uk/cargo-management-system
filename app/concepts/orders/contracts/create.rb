@@ -5,7 +5,6 @@ module Order::Contract
 
     validates :downloading_address, :unloading_address, :goods_ids, presence: true
     validates :cost, numericality: { greater_than: 0}
-    validates :customer_id, presence: true, inclusion: { in: ->(*) { Customer.pluck(:id).map(&:to_s) } }
-    validates :driver_id, inclusion: { in: ->(*) { Driver.pluck(:id).map(&:to_s) } }, allow_blank: true
+    validates :customer_id, presence: true
   end
 end
