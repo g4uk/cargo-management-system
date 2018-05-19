@@ -37,7 +37,11 @@
     <% else %>
       <td>N/A</td>
     <% end %>
-    <td><%= link_to trailer.company.name, company_path(trailer.company) %></td>
+    <% if trailer.company %>
+      <td><%= link_to trailer.company.name, company_path(trailer.company) %></td>
+    <% else %>
+      <td>N/A</td>
+    <% end %>
     <% unless current_driver %>
       <td><%= link_to 'Edit', edit_trailer_path(trailer), class: 'btn btn-success' %></td>
       <td><%= link_to 'Delete', trailer_path(trailer), method: :delete,

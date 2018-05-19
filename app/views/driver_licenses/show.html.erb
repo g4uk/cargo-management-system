@@ -16,7 +16,7 @@
     <li class="list-group-item"><strong>Additional notes: </strong><%= @model.additional_notes %></li>
     <li class="list-group-item"><strong>Actions: </strong>
       <%= link_to 'Edit', edit_driver_license_path(@model), class: 'btn btn-success btn-sm' %>
-      <%= link_to 'Delete', driver_licenses_path(@model),
+      <%= link_to 'Delete', driver_license_path(@model),
                   class: 'btn btn-danger btn-sm', method: :delete,
                   data: {confirm: 'Are you sure?'} %>
     </li>

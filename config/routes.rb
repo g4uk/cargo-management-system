@@ -2,14 +2,16 @@ Rails.application.routes.draw do
   devise_for :admins
   root to: 'home#index'
 
+  resources :company_owners, only: :create
+  resources :customers, only: :create
   devise_for :company_owners
   devise_for :drivers
   devise_for :customers
 
   resources :companies
+  resources :drivers
   resources :company_owners
   resources :customers
-  resources :drivers
   resources :driver_licenses
   resources :goods
   resources :insurance_policies

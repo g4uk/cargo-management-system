@@ -42,7 +42,11 @@
     <% elsif !current_driver %>
       <td>N/A</td>
     <% end %>
-    <td><%= link_to truck.company.name, company_path(truck.company) %></td>
+    <% if truck.company %>
+      <td><%= link_to truck.company.name, company_path(truck.company) %></td>
+    <% else %>
+      <td>N/A</td>
+    <% end %>
     <td><%= link_to 'Edit', edit_truck_path(truck), class: 'btn btn-success' %></td>
     <% unless current_driver %>
       <td><%= link_to 'Delete', truck_path(truck), method: :delete,
